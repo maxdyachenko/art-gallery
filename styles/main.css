@@ -1,7 +1,31 @@
 * {
-    box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
 }
 
 .front-page {
-    background: #000;
+	display: flex;
+	align-items: center;
+	background: url(../assets/img/front-bg.jpg) center center / cover no-repeat;
+}
+
+.front-page .container-fluid {
+	padding: 0 50px;
+}
+
+.front-box {
+	padding: 20px;
+	border-radius: 15px;
+	border: 2px solid #495057;
+	background: #fff;
+}
+.buttons-container {
+	display: flex;
+	justify-content: space-between;
 }
