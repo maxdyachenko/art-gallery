@@ -39,37 +39,42 @@ html, body {
 
 
 /* news styles */
-/*TODO add carousel, add responsive menu */
-header {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	min-height: 70px;
+/*TODO add carousel, add paggination */
+
+nav {
 	box-shadow: 0 -2px 18px 0 gray;
 }
-.menu-items {
+nav li {
 	display: flex;
 	align-items: center;
-	margin-bottom: 0;
 }
-.menu-items li:not(last-of-type) {
-	margin-right: 35px;
-	cursor: pointer;
+nav li:not(:last-of-type) {
+	margin-right: 30px;
 }
-.menu-items li:hover{
-	color: #000;
-	text-decoration: underline;
+.navbar-nav {
+	width: 100%;
+	justify-content: flex-end;
+}
+.user-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 .user-block img{
 	width: 100px;
 }
+.user-block .caption{
+	color: #fff;
+}
 
 .news-container {
 	margin-top: 40px;
+	padding: 15px 25px;
+	box-shadow: 1px 1px 20px 0 rgba(0,0,0,0.75);
 }
 .news-container .image-container {
 	position: relative;
-	padding: 6px 6px 0;
+	padding: 6px;
 	overflow: hidden;
 }
 
