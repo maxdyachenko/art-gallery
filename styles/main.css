@@ -39,16 +39,16 @@ html, body {
 
 
 /* news styles */
-/*TODO add carousel, add paggination */
+/*TODO add carousel */
 
-nav {
+.main-menu {
 	box-shadow: 0 -2px 18px 0 gray;
 }
-nav li {
+.main-menu li {
 	display: flex;
 	align-items: center;
 }
-nav li:not(:last-of-type) {
+.main-menu li:not(:last-of-type) {
 	margin-right: 30px;
 }
 .navbar-nav {
