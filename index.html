@@ -13,18 +13,18 @@
 <a href="news.html">News</a>
     <div class="container-fluid">
         <div class="row justify-content-between">
-            <div class="col-md-3 front-box">
+            <div class="col-md-3">
 
             </div>
             <div class="col-md-3 front-box">
-                <form>
+                <form class="sign-in">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <label for="InputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="InputPassword1">Password</label>
+                        <input type="password" class="form-control" id="InputPassword1" placeholder="Password">
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
@@ -34,11 +34,49 @@
                     </div>
                     <div class="buttons-container">
                         <button type="submit" class="btn btn-primary">Sign in</button>
-                        <button type="submit" class="btn btn-primary">Sign up</button>
+                        <button type="submit" class="btn btn-primary" id="signup-button">Sign up</button>
                     </div>
                 </form>
+
+                <form class="sign-up">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <small id="password-help" class="form-text text-muted">Minimum 8 symbols.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2">Confirm Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="nameField">Your Name</label>
+                        <input type="text" class="form-control" id="nameField" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastNameField">Your Last Name</label>
+                        <input type="text" class="form-control" id="lastNameField" placeholder="Your Last Name">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+
             </div>
         </div>
     </div>
+<script>
+    var signupButton = document.getElementById('signup-button'),
+        signupForm = document.getElementsByClassName('sign-up')[0],
+        signinForm = document.getElementsByClassName('sign-in')[0];
+    signupButton.addEventListener('click', function() {
+        event.preventDefault();
+        signinForm.classList.add('disable');
+        signupForm.classList.add('active');
+    })
+</script>
 </body>
 </html>

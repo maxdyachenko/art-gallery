@@ -27,14 +27,46 @@ html, body {
 }
 
 .front-box {
+	position: relative;
 	padding: 20px;
 	border-radius: 15px;
 	border: 2px solid #495057;
 	background: #fff;
+	overflow: hidden;
 }
-.buttons-container {
+
+.sign-in {
+	opacity: 1;
+	transition: all .5s;
+}
+.sign-in.disable {
+	position: absolute;
+	top:0;
+	left: 0;
+	pointer-events: none;
+	opacity: 0;
+	transform: translateX(-20%);
+}
+.sign-up {
+	position: absolute;
+	pointer-events: none;
+	opacity: 0;
+	transform: translateX(20%);
+	z-index: -1;
+	transition: all .5s .5s;
+}
+.sign-up.active {
+	position: static;
+	pointer-events: auto;
+	opacity: 1;
+	transform: translateX(0%);
+	z-index: 10;
+}
+
+.front-box .buttons-container {
 	display: flex;
 	justify-content: space-between;
+	cursor: pointer;
 }
 
 
