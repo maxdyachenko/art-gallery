@@ -3,6 +3,13 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+ul {
+	list-style: initial;
+}
+li {
+	display: inline-block;
+}
+
 
 html, body {
 	width: 100%;
@@ -28,4 +35,67 @@ html, body {
 .buttons-container {
 	display: flex;
 	justify-content: space-between;
+}
+
+
+/* news styles */
+/*TODO make popup to confirm image delete, add carousel, add responsive menu */
+header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	min-height: 70px;
+	box-shadow: 0 -2px 18px 0 gray;
+}
+.menu-items {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0;
+}
+.menu-items li:not(last-of-type) {
+	margin-right: 35px;
+	cursor: pointer;
+}
+.menu-items li:hover{
+	color: #000;
+	text-decoration: underline;
+}
+.user-block img{
+	width: 100px;
+}
+
+.news-container {
+	margin-top: 40px;
+}
+.news-container .image-container {
+	position: relative;
+	padding: 6px 6px 0;
+	overflow: hidden;
+}
+
+.news-container .image-container img{
+	width: 100%;
+	object-fit: cover;
+}
+
+.custom-popover {
+	display: flex;
+	align-items: flex-end;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	padding: 0 15px 20px 15px;
+	left: 0;
+	bottom: 0;
+	transition: all .5s;
+	transform: translate3d(0, 100%, 0);
+}
+.custom-popover .buttons-container {
+	width: 100%;
+}
+.custom-popover button {
+	cursor: pointer;
+}
+.news-container .image-container:hover .custom-popover {
+	transform: translate3d(0, 0, 0);
 }
