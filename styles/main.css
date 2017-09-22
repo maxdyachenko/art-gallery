@@ -99,7 +99,7 @@ html, body {
 	color: #fff;
 }
 
-.news-container {
+.content-container {
 	margin-top: 40px;
 	padding: 15px 25px;
 	box-shadow: 1px 1px 20px 0 rgba(0,0,0,0.75);
@@ -127,4 +127,10 @@ html, body {
 
 .custom-popover button {
 	cursor: pointer;
+}
+
+
+/*edit profile styles */
+.edit-profile .tab-content {
+	margin-top: 40px;
 }
