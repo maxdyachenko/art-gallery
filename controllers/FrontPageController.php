@@ -22,16 +22,16 @@ class FrontPageController{
                 $errors['lastName'] = "Last Name should include at least 2 charachters";
             }
             if (!FrontPage::checkPswd($pswd)){
-                $errors['pswd'] = "Password should include at least 6 charachters";
+                $errors['pswd'] = 1;
             }
             if (!FrontPage::checkPswd2($pswd, $pswd2)){
                 $errors['pswd2'] = "Passwords do not match";
             }
             if (!FrontPage::checkEmail($mail)){
-                $errors['mail'] = "Incorrect mail";
+                $errors['mail'] = 1;
             }
             if (FrontPage::checkEmailExists($mail)) {
-                $errors['mail'] = "Mail already used";
+                $errors['mail'] = 2; //hack to show another mistake in view file
             }
 
             if (empty($errors)) {

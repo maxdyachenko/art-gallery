@@ -28,56 +28,47 @@
                     <button type="submit" class="btn btn-primary" id="signup-button">Sign up</button>
                 </div>
             </form>
-            <form class="sign-up <?php if (isset($errors) && !empty($errors)) echo 'active' ?>" action="#" method="post">
+            <form class="sign-up <?php if (isset($errors) && !empty($errors)) echo 'active'; ?>" action="#" method="post">
                 <div class="form-group">
                     <label for="regEmail">Email address</label>
                     <input type="email" class="form-control" id="regEmail" name="regEmail" aria-describedby="emailHelp"
                            placeholder="Enter email" value="<?php if(isset($mail))echo $mail; ?>" required>
+                    <div class="invalid-feedback <?php if (isset($errors['mail'])) echo 'visible'; ?>"><?php if (isset($errors['mail']) && $errors['mail'] == 2) echo "Email already exist"; else echo "Invalid email";?></div>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
                     </small>
-                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['mail'])) echo $errors['mail']; ?></div>
                 </div>
                 <div class="form-group">
                     <label for="regPswd">Password</label>
                     <input type="password" class="form-control" id="regPswd" name="regPswd" placeholder="Password" required>
+                    <div class="invalid-feedback <?php if (isset($errors['pswd'])) echo 'visible'; ?>">Password should include at least 6 characters</div>
                     <small id="password-help" class="form-text text-muted">Minimum 6 symbols.</small>
-                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['pswd'])) echo $errors['pswd']; ?></div>
                 </div>
                 <div class="form-group">
                     <label for="regPswd2">Confirm Password</label>
                     <input type="password" class="form-control" id="regPswd2" name="regPswd2"
                            placeholder="Confirm Password" required>
-                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['pswd2'])) echo $errors['pswd2']; ?></div>
+                    <div class="invalid-feedback <?php if (isset($errors['pswd2'])) echo 'visible'; ?>">Passwords dont match</div>
                 </div>
                 <div class="form-group">
                     <label for="regName">Your Name</label>
                     <input type="text" class="form-control" name="regName" id="regName" placeholder="Your Name" value="<?php if(isset($name))echo $name; ?>" required>
-                    <small id="password-help" class="form-text text-muted">Minimum 2 symbols.</small>
-                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['name'])) echo $errors['name']; ?></div>
+                    <div class="invalid-feedback <?php if (isset($errors['name'])) echo 'visible'; ?>">Name should be at leas 2 symbols</div>                    <small id="password-help" class="form-text text-muted">Minimum 2 symbols.</small>
+
                 </div>
                 <div class="form-group">
                     <label for="regLastName">Your Last Name</label>
                     <input type="text" class="form-control" name="regLastName" id="regLastName"
                            placeholder="Your Last Name" value="<?php if(isset($lastName))echo $lastName; ?>" required>
+                    <div class="invalid-feedback <?php if (isset($errors['lastName'])) echo 'visible'; ?>">Last Name should be at leas 2 symbols</div>
                     <small id="password-help" class="form-text text-muted">Minimum 2 symbols.</small>
-                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['lastName'])) echo $errors['lastName']; ?></div>
                 </div>
 
-                <button type="submit" class="btn btn-primary" name="register">Sign Up</button>
+                <button type="submit" class="btn btn-primary" name="register" id="registerButton">Sign Up</button>
             </form>
 
         </div>
     </div>
 </div>
-<script>
-    var signupButton = document.getElementById('signup-button'),
-        signupForm = document.getElementsByClassName('sign-up')[0],
-        signinForm = document.getElementsByClassName('sign-in')[0];
-    signupButton.addEventListener('click', function () {
-        event.preventDefault();
-        signinForm.classList.add('disable');
-        signupForm.classList.add('active');
-    })
-</script>
+<script src="/assets/scripts/front-page.js"></script>
 </body>
 </html>
