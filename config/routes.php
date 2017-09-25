@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    '' => 'site/index', // actionIndex в SiteController
+    '' => 'frontPage/index', // actionIndex в FrontPageController
 );
