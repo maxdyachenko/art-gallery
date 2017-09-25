@@ -35,32 +35,32 @@
                            placeholder="Enter email" value="<?php if(isset($mail))echo $mail; ?>" required>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
                     </small>
-                    <div class="invalid-feedback <?php if(!empty($errors) && $errors['mail']) echo 'visible'?>">Please enter correct email</div>
+                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['mail'])) echo $errors['mail']; ?></div>
                 </div>
                 <div class="form-group">
                     <label for="regPswd">Password</label>
                     <input type="password" class="form-control" id="regPswd" name="regPswd" placeholder="Password" required>
                     <small id="password-help" class="form-text text-muted">Minimum 6 symbols.</small>
-                    <div class="invalid-feedback <?php if(!empty($errors) && $errors['pswd']) echo 'visible'?>">Please enter correct password</div>
+                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['pswd'])) echo $errors['pswd']; ?></div>
                 </div>
                 <div class="form-group">
                     <label for="regPswd2">Confirm Password</label>
                     <input type="password" class="form-control" id="regPswd2" name="regPswd2"
                            placeholder="Confirm Password" required>
-                    <div class="invalid-feedback <?php if(!empty($errors) && $errors['pswd2']) echo 'visible'?>">Passwords do not match</div>
+                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['pswd2'])) echo $errors['pswd2']; ?></div>
                 </div>
                 <div class="form-group">
                     <label for="regName">Your Name</label>
                     <input type="text" class="form-control" name="regName" id="regName" placeholder="Your Name" value="<?php if(isset($name))echo $name; ?>" required>
                     <small id="password-help" class="form-text text-muted">Minimum 2 symbols.</small>
-                    <div class="invalid-feedback <?php if(!empty($errors) && $errors['name']) echo 'visible'?>">Please enter correct name</div>
+                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['name'])) echo $errors['name']; ?></div>
                 </div>
                 <div class="form-group">
                     <label for="regLastName">Your Last Name</label>
                     <input type="text" class="form-control" name="regLastName" id="regLastName"
                            placeholder="Your Last Name" value="<?php if(isset($lastName))echo $lastName; ?>" required>
                     <small id="password-help" class="form-text text-muted">Minimum 2 symbols.</small>
-                    <div class="invalid-feedback <?php if(!empty($errors) && $errors['lastName']) echo 'visible'?>">Please enter correct last name</div>
+                    <div class="invalid-feedback visible"><?php if (!empty($errors) && isset($errors['lastName'])) echo $errors['lastName']; ?></div>
                 </div>
 
                 <button type="submit" class="btn btn-primary" name="register">Sign Up</button>
