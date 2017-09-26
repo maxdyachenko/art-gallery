@@ -1,5 +1,4 @@
 <?php
-#TODO make safe registration
 require_once(ROOT . '/models/FrontPage.php');
 class FrontPageController{
     public function actionIndex(){
@@ -9,11 +8,11 @@ class FrontPageController{
     public function actionRegister(){
         if (isset($_POST['register'])) {
             $errors = [];
-            $name = $_POST['regName'];
-            $lastName = $_POST['regLastName'];
-            $mail = $_POST['regEmail'];
-            $pswd = $_POST['regPswd'];
-            $pswd2 = $_POST['regPswd2'];
+            $name = $this->safeInput($_POST['regName']);
+            $lastName = $this->safeInput($_POST['regLastName']);
+            $mail = $this->safeInput($_POST['regEmail']);
+            $pswd = $this->safeInput($_POST['regPswd']);
+            $pswd2 = $this->safeInput($_POST['regPswd2']);
 
             if (!FrontPage::checkName($name)){
                 $errors['name'] = "Name should include at least 2 charachters";
@@ -39,5 +38,12 @@ class FrontPageController{
             }
         }
         require_once(ROOT . '/views/site/index.php');
+    }
+
+    public function safeInput($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 }

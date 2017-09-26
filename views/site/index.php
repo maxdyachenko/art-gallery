@@ -28,7 +28,7 @@
                     <button type="submit" class="btn btn-primary" id="signup-button">Sign up</button>
                 </div>
             </form>
-            <form class="sign-up <?php if (isset($errors) && !empty($errors)) echo 'active'; ?>" action="#" method="post">
+            <form class="sign-up <?php if (isset($errors) && !empty($errors)) echo 'active'; ?>" action="/" method="post">
                 <div class="form-group">
                     <label for="regEmail">Email address</label>
                     <input type="email" class="form-control" id="regEmail" name="regEmail" aria-describedby="emailHelp"

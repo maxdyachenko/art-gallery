@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         signupForm.classList.add('active');
     });
 
-    signupForm.addEventListener('submit', validateRegForm)
+    signupForm.addEventListener('submit', validateRegForm);
 
     function validateRegForm() {
         !isCorrectEmail()? addMistakeClass(regEmail): removeMistakeClass(regEmail);
@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function isCorrectName(element){
         if (element.value.length > 1)
             return true;
-        debugger;
         return false;
     }
     function isConfirmedPswd() {

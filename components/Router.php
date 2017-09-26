@@ -24,16 +24,12 @@ class Router{
 
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~$uriPattern~", $uri)) {
-                $internalRoute = preg_replace("~$uriPattern~", $path, $uri);//NEED TO BE CLARIFIED
-//                echo "subject = {$uri}<br>";
-//                echo "patter = {$uriPattern}<br>";
-//                echo "string to replace = {$path}<br>";
-//                echo "result = {$internalRoute}";
+                $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
 
-                $segments = explode('/', $internalRoute);//разбивает на массив по слешу
+                $segments = explode('/', $internalRoute);
 
-                $controllerName = array_shift($segments) . 'Controller'; // array_shift gets first array element and delete it from array
-                $controllerName = ucfirst($controllerName);// before productController, after ProductController
+                $controllerName = array_shift($segments) . 'Controller';
+                $controllerName = ucfirst($controllerName);
 
                 $actionName = 'action' . ucfirst(array_shift($segments));
 
@@ -46,7 +42,6 @@ class Router{
                     include_once($controllerFile);
                 }
 
-                // Создать объект, вызвать метод (т.е. action)
                 $controllerObject = new $controllerName;
 
 
