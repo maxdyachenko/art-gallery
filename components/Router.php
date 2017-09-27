@@ -21,11 +21,9 @@ class Router{
     public function run()
     {
         $uri = $this->getURI();
-
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~$uriPattern~", $uri)) {
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-
                 $segments = explode('/', $internalRoute);
 
                 $controllerName = array_shift($segments) . 'Controller';
@@ -35,7 +33,6 @@ class Router{
 
                 $parameters = $segments;
 
-                // Подключить файл класса-контроллера
                 $controllerFile = ROOT . '/controllers/' . $controllerName . '.php';
 
                 if (file_exists($controllerFile)) {
@@ -44,10 +41,7 @@ class Router{
 
                 $controllerObject = new $controllerName;
 
-
                 $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
-
-
                 if ($result != null) {
                     break;
                 }

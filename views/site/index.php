@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label for="regEmail">Email address</label>
                     <input type="email" class="form-control" id="regEmail" name="regEmail" aria-describedby="emailHelp"
-                           placeholder="Enter email" value="<?php if(isset($mail))echo $mail; ?>" required>
+                           placeholder="Enter email" value="<?php if(isset($this->mail))echo $this->mail; ?>" required>
                     <div class="invalid-feedback <?php if (isset($errors['mail'])) echo 'visible'; ?>"><?php if (isset($errors['mail']) && $errors['mail'] == 2) echo "Email already exist"; else echo "Invalid email";?></div>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
                     </small>
@@ -51,14 +51,14 @@
                 </div>
                 <div class="form-group">
                     <label for="regName">Your Name</label>
-                    <input type="text" class="form-control" name="regName" id="regName" placeholder="Your Name" value="<?php if(isset($name))echo $name; ?>" required>
+                    <input type="text" class="form-control" name="regName" id="regName" placeholder="Your Name" value="<?php if(isset($this->name))echo $this->name; ?>" required>
                     <div class="invalid-feedback <?php if (isset($errors['name'])) echo 'visible'; ?>">Name should be at leas 2 symbols</div>                    <small id="password-help" class="form-text text-muted">Minimum 2 symbols.</small>
 
                 </div>
                 <div class="form-group">
                     <label for="regLastName">Your Last Name</label>
                     <input type="text" class="form-control" name="regLastName" id="regLastName"
-                           placeholder="Your Last Name" value="<?php if(isset($lastName))echo $lastName; ?>" required>
+                           placeholder="Your Last Name" value="<?php if(isset($this->lastName))echo $this->lastName; ?>" required>
                     <div class="invalid-feedback <?php if (isset($errors['lastName'])) echo 'visible'; ?>">Last Name should be at leas 2 symbols</div>
                     <small id="password-help" class="form-text text-muted">Minimum 2 symbols.</small>
                 </div>

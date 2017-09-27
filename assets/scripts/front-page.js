@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function isCorrectPswd() {
-        if (regPswd.value.length > 5)
+        if (regPswd.value.length > 5 && element.value.length < 17)
             return true;
         return false;
     }
 
     function isCorrectName(element){
-        if (element.value.length > 1)
+        if (element.value.length > 1 && element.value.length < 17)
             return true;
         return false;
     }
