@@ -1,5 +1,4 @@
 <?php
-#TODO make password hash
 require_once(ROOT . '/models/FrontPage.php');
 class FrontPageController{
     private $name;
@@ -44,7 +43,8 @@ class FrontPageController{
             if (empty($errors)) {
                 $this->code = rand();
                 $this->sendEmail();
-                FrontPage::primaryRegister($this->name, $this->lastName, $this->mail, $this->pswd, $this->code);
+                $hash = password_hash($this->pswd, PASSWORD_DEFAULT);
+                FrontPage::primaryRegister($this->name, $this->lastName, $this->mail, $hash, $this->code);
             }
         }
         require_once(ROOT . '/views/site/index.php');//TODO make that at the actionINdex
