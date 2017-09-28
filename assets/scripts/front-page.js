@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var signupButton = document.getElementById('signup-button'),
         signupForm = document.getElementsByClassName('sign-up')[0],
         registerButton = document.getElementById('registerButton'),
+        authEmail = document.getElementById('authEmail'),
         regEmail = document.getElementById('regEmail'),
         regPswd = document.getElementById('regPswd'),
         regPswd2 = document.getElementById('regPswd2'),
@@ -17,9 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     signupForm.addEventListener('submit', validateRegForm);
+    signinForm.addEventListener('submit', validateAuthForm);
+
+    function validateAuthForm() {
+        !isCorrectEmail(authEmail)? addMistakeClass(authEmail): removeMistakeClass(authEmail);
+    }
 
     function validateRegForm() {
-        !isCorrectEmail()? addMistakeClass(regEmail): removeMistakeClass(regEmail);
+        !isCorrectEmail(regEmail)? addMistakeClass(regEmail): removeMistakeClass(regEmail);
         !isCorrectPswd() ? addMistakeClass(regPswd): removeMistakeClass(regPswd);
         !isConfirmedPswd() ? addMistakeClass(regPswd2): removeMistakeClass(regPswd2);
         !isCorrectName(regName) ? addMistakeClass(regName): removeMistakeClass(regName);
@@ -52,9 +58,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
     }
 
-    function isCorrectEmail() {
+    function isCorrectEmail(email) {
         var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return regex.test(regEmail.value);
+        return regex.test(email.value);
     }
 });
 

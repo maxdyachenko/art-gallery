@@ -7,14 +7,34 @@ class FrontPageController{
     private $pswd;
     private $pswd2;
     private $code;
+
+    public $errors = [];
+    public $authError;
     public function actionIndex(){
-        $this->fieldsValidate();
+        $this->authFieldsValidate();
+        $this->regFieldsValidate();
+
+        require_once(ROOT . '/views/site/index.php');
         return true;
     }
 
-    public function fieldsValidate(){
+    public function authFieldsValidate() {
+        if (isset($_POST['auth'])){
+            $this->authError = false;
+            $email = $this->safeInput($_POST['authEmail']);
+            $pswd = $this->safeInput($_POST['authPswd']);
+
+            if (!FrontPage::checkEmail($email) || !FrontPage::checkEmailExists($email) || !FrontPage::checkPswd($pswd) || !FrontPage::checkCredentials($email, $pswd)) {
+                $this->authError = true;
+            }
+            else{
+                FrontPage::auth();
+            }
+        }
+    }
+
+    public function regFieldsValidate(){
         if (isset($_POST['register'])) {
-            $errors = [];
             $this->name = $this->safeInput($_POST['regName']);
             $this->lastName = $this->safeInput($_POST['regLastName']);
             $this->mail = $this->safeInput($_POST['regEmail']);
@@ -22,25 +42,25 @@ class FrontPageController{
             $this->pswd2 = $this->safeInput($_POST['regPswd2']);
 
             if (!FrontPage::checkName($this->name)){
-                $errors['name'] = 1;
+                $this->errors['name'] = 1;
             }
             if (!FrontPage::checkName($this->lastName)){
-                $errors['lastName'] = 1;
+                $this->errors['lastName'] = 1;
             }
             if (!FrontPage::checkPswd($this->pswd)){
-                $errors['pswd'] = 1;
+                $this->errors['pswd'] = 1;
             }
             if (!FrontPage::checkPswd2($this->pswd, $this->pswd2)){
-                $errors['pswd2'] = 1;
+                $this->errors['pswd2'] = 1;
             }
             if (!FrontPage::checkEmail($this->mail)){
-                $errors['mail'] = 1;
+                $this->errors['mail'] = 1;
             }
             if (FrontPage::checkEmailExists($this->mail)) {
-                $errors['mail'] = 2; //hack to show another mistake in view file
+                $this->errors['mail'] = 2; //hack to show another mistake in view file
             }
 
-            if (empty($errors)) {
+            if (empty($this->errors)) {
                 $bytes = random_bytes(10);
                 $this->code = bin2hex($bytes);
                 $this->sendEmail();
@@ -48,7 +68,6 @@ class FrontPageController{
                 FrontPage::primaryRegister($this->name, $this->lastName, $this->mail, $hash, $this->code);
             }
         }
-        require_once(ROOT . '/views/site/index.php');//TODO make that at the actionINdex
     }
 
     public function sendEmail() {

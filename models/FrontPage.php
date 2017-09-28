@@ -3,6 +3,21 @@ require_once(ROOT . '/components/Db.php');
 
 class FrontPage
 {
+    public static function auth() {
+        $db = Db::getConnection();
+
+    }
+
+    public static function checkCredentials($email, $password) {
+        $db = Db::getConnection();
+        $sql = 'SELECT id FROM USERS'
+            .' WHERE email = :email AND password = :password';
+        $stmt = $db->prepare($sql);
+        $id = $stmt->execute(array(':email' => $email, ':password' => $password));
+        return $stmt->fetchColumn();
+    }
+
+
     public static function finalRegister($code)
     {
 
@@ -11,10 +26,10 @@ class FrontPage
         $sql = 'UPDATE users SET isverified = 1 '
             . 'WHERE code = :code';
 
-        $result = $db->prepare($sql);
-        $result->bindParam(':code', $code, PDO::PARAM_INT);
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':code', $code, PDO::PARAM_INT);
 
-        return $result->execute();
+        return $stmt->execute();
     }
 
     public static function primaryRegister($name, $lastName, $email, $password, $code)
