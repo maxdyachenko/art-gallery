@@ -41,7 +41,8 @@ class FrontPageController{
             }
 
             if (empty($errors)) {
-                $this->code = rand();
+                $bytes = random_bytes(10);
+                $this->code = bin2hex($bytes);
                 $this->sendEmail();
                 $hash = password_hash($this->pswd, PASSWORD_DEFAULT);
                 FrontPage::primaryRegister($this->name, $this->lastName, $this->mail, $hash, $this->code);
