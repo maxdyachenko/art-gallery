@@ -10,6 +10,7 @@ class FrontPageController{
 
     public $errors = [];
     public $authError;
+    public $isRegistered = false;
     public function actionIndex(){
         $this->authFieldsValidate();
         $this->regFieldsValidate();
@@ -66,6 +67,7 @@ class FrontPageController{
                 $this->sendEmail();
                 $hash = password_hash($this->pswd, PASSWORD_DEFAULT);
                 FrontPage::primaryRegister($this->name, $this->lastName, $this->mail, $hash, $this->code);
+                $this->isRegistered = true;
             }
         }
     }

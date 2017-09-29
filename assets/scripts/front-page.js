@@ -10,6 +10,15 @@ document.addEventListener('DOMContentLoaded', function() {
         regLastName = document.getElementById('regLastName'),
         signinForm = document.getElementsByClassName('sign-in')[0];
 
+    (function () {
+        if (document.getElementById('email-success-alert')){
+            setTimeout(function () {
+                var alertSuccess = document.getElementById('email-success-alert');
+                alertSuccess.classList.add('hidden')
+            }, 5000);
+        }
+    })();
+
     //activate animation
     signupButton.addEventListener('click', function () {
         event.preventDefault();

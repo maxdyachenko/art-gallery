@@ -42,13 +42,8 @@ class FrontPage
             . 'VALUES (:name,:lastname,:email,:password,:code)';
 
         $result = $db->prepare($sql);
-        $result->bindParam(':name', $name, PDO::PARAM_STR);
-        $result->bindParam(':lastname', $lastName, PDO::PARAM_STR);
-        $result->bindParam(':email', $email, PDO::PARAM_STR);
-        $result->bindParam(':password', $password, PDO::PARAM_STR);
-        $result->bindParam(':code', $code, PDO::PARAM_INT);
 
-        return $result->execute();
+        $result->execute(array(':name' => $name, ':lastname' => $lastName, ':email' => $email, ':password' => $password, ':code' => $code));
     }
 
     public static function checkEmailLink($name, $code) {

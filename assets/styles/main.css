@@ -16,6 +16,9 @@ li {
 	opacity: 1 !important;
 	pointer-events: auto !important;
 }
+.hidden {
+	display: none;
+}
 
 html, body {
 	width: 100%;
@@ -27,7 +30,13 @@ html, body {
 	align-items: center;
 	background: url(../img/front-bg.jpg) center center / cover no-repeat;
 }
-
+.alert-email-check {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
 .front-page .container-fluid {
 	padding: 0 50px;
 }
@@ -140,6 +149,7 @@ html, body {
 .edit-profile .tab-content {
 	margin-top: 40px;
 }
+
 
 /* email confirmed page */
 .email-confirm h1, .email-confirm p {

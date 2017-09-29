@@ -1,5 +1,10 @@
 <?php include ROOT . '/views/layouts/head.php' ?>
 <body class="front-page">
+<?php if ($this->isRegistered): ?>
+    <div class="alert alert-success alert-email-check" id="email-success-alert" role="alert">
+        Please, confirm your address on email otherwise your account will be deleting after 24 hours.
+    </div>
+<?php endif; ?>
 <a href="news.html">News</a>
 <div class="container-fluid">
     <div class="row justify-content-between">
