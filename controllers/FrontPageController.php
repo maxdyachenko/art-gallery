@@ -1,6 +1,8 @@
 <?php
 require_once(ROOT . '/models/FrontPage.php');
-class FrontPageController{
+
+class FrontPageController
+{
     private $name;
     private $lastName;
     private $mail;
@@ -11,7 +13,9 @@ class FrontPageController{
     public $errors = [];
     public $authError;
     public $notVerified = false;
-    public function actionIndex(){
+
+    public function actionIndex()
+    {
         $this->authFieldsValidate();
         $this->regFieldsValidate();
 
@@ -19,28 +23,32 @@ class FrontPageController{
         return true;
     }
 
-    public function authFieldsValidate() {
-        if (isset($_POST['auth'])){
+    public function authFieldsValidate()
+    {
+        if (isset($_POST['auth'])) {
             $this->authError = false;
             $email = $this->safeInput($_POST['authEmail']);
             $pswd = $this->safeInput($_POST['authPswd']);
 
-            if (!FrontPage::checkEmail($email) || !FrontPage::checkEmailExists($email) || !FrontPage::checkPswd($pswd) || !FrontPage::checkCredentials($email, $pswd)) {
+
+            if (!FrontPage::checkEmail($email) || !FrontPage::checkEmailExists($email) || !FrontPage::checkPswd($pswd)) {
                 $this->authError = true;
-            }
-            else{
-                if (FrontPage::isVerified($email, $pswd)) {
-                    FrontPage::auth();
-                }
-                else {
+            } else {
+                $userId = FrontPage::checkCredentials($email, $pswd);
+                if (!$userId) {
+                    $this->authError = true;
+                } else if (FrontPage::isVerified($email)){
+                    FrontPage::auth($userId);
+                    header('Location: /main');
+                } else{
                     $this->notVerified = true;
                 }
-
             }
         }
     }
 
-    public function regFieldsValidate(){
+    public function regFieldsValidate()
+    {
         if (isset($_POST['register'])) {
             $this->name = $this->safeInput($_POST['regName']);
             $this->lastName = $this->safeInput($_POST['regLastName']);
@@ -48,19 +56,19 @@ class FrontPageController{
             $this->pswd = $this->safeInput($_POST['regPswd']);
             $this->pswd2 = $this->safeInput($_POST['regPswd2']);
 
-            if (!FrontPage::checkName($this->name)){
+            if (!FrontPage::checkName($this->name)) {
                 $this->errors['name'] = 1;
             }
-            if (!FrontPage::checkName($this->lastName)){
+            if (!FrontPage::checkName($this->lastName)) {
                 $this->errors['lastName'] = 1;
             }
-            if (!FrontPage::checkPswd($this->pswd)){
+            if (!FrontPage::checkPswd($this->pswd)) {
                 $this->errors['pswd'] = 1;
             }
-            if (!FrontPage::checkPswd2($this->pswd, $this->pswd2)){
+            if (!FrontPage::checkPswd2($this->pswd, $this->pswd2)) {
                 $this->errors['pswd2'] = 1;
             }
-            if (!FrontPage::checkEmail($this->mail)){
+            if (!FrontPage::checkEmail($this->mail)) {
                 $this->errors['mail'] = 1;
             }
             if (FrontPage::checkEmailExists($this->mail)) {
@@ -78,43 +86,45 @@ class FrontPageController{
         }
     }
 
-    public function sendEmail() {
+    public function sendEmail()
+    {
         $to = $this->mail;
         $subject = "Hi, {$this->name} ! Please, confirm you email on Art Gallery";
         $message = '
                 <html>
                     <head>
-                        <title>'.$subject.'</title>
+                        <title>' . $subject . '</title>
                     </head>
                     <body>
-                        <p>Your name: '.$this->name.'</p>
-                        <p>Password '.$this->pswd.'</p> 
+                        <p>Your name: ' . $this->name . '</p>
+                        <p>Password ' . $this->pswd . '</p> 
                         <p>-------------------------</p>
-                        <p>Please, click this link to verify your email: http://online-shopping.esy.es/verify-email?username='.$this->name.'&code='.$this->code.'</p>                
+                        <p>Please, click this link to verify your email: http://online-shopping.esy.es/verify-email?username=' . $this->name . '&code=' . $this->code . '</p>                
                     </body>
                 </html>';
-        $headers  = "Content-type: text/html; charset=utf-8 \r\n"."From: Art Gallery <from@art-gallery.com>\r\n";
+        $headers = "Content-type: text/html; charset=utf-8 \r\n" . "From: Art Gallery <from@art-gallery.com>\r\n";
         mail($to, $subject, $message, $headers);
     }
 
-    public function safeInput($data) {
+    public function safeInput($data)
+    {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
     }
 
-    public function actionRegister() {
+    public function actionRegister()
+    {
         $username = $this->safeInput($_GET['username']);
         $code = $this->safeInput($_GET['code']);
 
-        if (!FrontPage::checkEmailLink($username, $code)){
+        if (!FrontPage::checkEmailLink($username, $code)) {
             FrontPage::finalRegister($code);
             require_once(ROOT . '/views/layouts/email-confirmed.php');
-            header( "refresh:5; url=/" );
-        }
-        else {
-            header( "refresh:5; url=/" );
+            header("refresh:5; url=/");
+        } else {
+            header("refresh:5; url=/");
         }
 
         return true;

@@ -3,28 +3,32 @@ require_once(ROOT . '/components/Db.php');
 
 class FrontPage
 {
-    public static function auth() {
-        $db = Db::getConnection();
-
+    public static function auth($id) {
+        $_SESSION['id'] = $id;
     }
 
     public static function checkCredentials($email, $password) {
         $db = Db::getConnection();
 
-        $sql = 'SELECT id FROM USERS'
-            .' WHERE email = :email AND password = :password';
+        $sql = 'SELECT id, password FROM USERS'
+            .' WHERE email = :email';
         $stmt = $db->prepare($sql);
-        $stmt->execute(array(':email' => $email, ':password' => $password));
-        return $stmt->fetchColumn();
+        $stmt->execute(array(':email' => $email));
+        $row = $stmt->fetch(PDO::FETCH_LAZY);
+        $isEqualPswd = password_verify($password , $row->password);
+        if (!$isEqualPswd){
+            return false;
+        }
+        return $row->id;
     }
 
-    public static function isVerified($email, $password) {
+    public static function isVerified($email) {
         $db = Db::getConnection();
 
         $sql = 'SELECT isverified FROM USERS'
-            .' WHERE email = :email AND password = :password';
+            .' WHERE email = :email';
         $stmt = $db->prepare($sql);
-        $stmt->execute(array(':email' => $email, ':password' => $password));
+        $stmt->execute(array(':email' => $email));
         return $stmt->fetchColumn();
     }
 
