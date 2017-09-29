@@ -1,8 +1,8 @@
 <?php include ROOT . '/views/layouts/head.php' ?>
 <body class="front-page">
-<?php if ($this->isRegistered): ?>
-    <div class="alert alert-success alert-email-check" id="email-success-alert" role="alert">
-        Please, confirm your address on email otherwise your account will be deleting after 24 hours.
+<?php if ($this->notVerified): ?>
+    <div class="alert alert-danger alert-email-check" role="alert">
+        Confirm your email to authorize!
     </div>
 <?php endif; ?>
 <a href="news.html">News</a>
@@ -42,7 +42,7 @@
                 <div class="form-group">
                     <label for="regEmail">Email address</label>
                     <input type="email" class="form-control" id="regEmail" name="regEmail" aria-describedby="emailHelp"
-                           placeholder="Enter email" value="<?php if (isset($this->mail)) echo $this->mail; ?>"
+                           placeholder="Enter email" value="<?php if (isset($this->mail) && !empty($this->errors)) echo $this->mail; ?>"
                            required>
                     <div class="invalid-feedback <?php if (isset($this->errors['mail'])) echo 'visible'; ?>"><?php if (isset($this->errors['mail']) && $this->errors['mail'] == 2) echo "Email already exist"; else echo "Invalid email"; ?></div>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <label for="regName">Your Name</label>
                     <input type="text" class="form-control" name="regName" id="regName" placeholder="Your Name"
-                           value="<?php if (isset($this->name)) echo $this->name; ?>" required>
+                           value="<?php if (isset($this->name) && !empty($this->errors)) echo $this->name; ?>" required>
                     <div class="invalid-feedback <?php if (isset($this->errors['name'])) echo 'visible'; ?>">Name should be at
                         leas 2 symbols
                     </div>
@@ -79,7 +79,7 @@
                     <label for="regLastName">Your Last Name</label>
                     <input type="text" class="form-control" name="regLastName" id="regLastName"
                            placeholder="Your Last Name"
-                           value="<?php if (isset($this->lastName)) echo $this->lastName; ?>" required>
+                           value="<?php if (isset($this->lastName) && !empty($this->errors)) echo $this->lastName; ?>" required>
                     <div class="invalid-feedback <?php if (isset($this->errors['lastName'])) echo 'visible'; ?>">Last Name
                         should be at leas 2 symbols
                     </div>

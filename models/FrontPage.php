@@ -14,10 +14,19 @@ class FrontPage
         $sql = 'SELECT id FROM USERS'
             .' WHERE email = :email AND password = :password';
         $stmt = $db->prepare($sql);
-        $id = $stmt->execute(array(':email' => $email, ':password' => $password));
+        $stmt->execute(array(':email' => $email, ':password' => $password));
         return $stmt->fetchColumn();
     }
 
+    public static function isVerified($email, $password) {
+        $db = Db::getConnection();
+
+        $sql = 'SELECT isverified FROM USERS'
+            .' WHERE email = :email AND password = :password';
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array(':email' => $email, ':password' => $password));
+        return $stmt->fetchColumn();
+    }
 
     public static function finalRegister($code)
     {

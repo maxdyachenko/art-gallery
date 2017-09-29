@@ -10,7 +10,7 @@ class FrontPageController{
 
     public $errors = [];
     public $authError;
-    public $isRegistered = false;
+    public $notVerified = false;
     public function actionIndex(){
         $this->authFieldsValidate();
         $this->regFieldsValidate();
@@ -29,7 +29,13 @@ class FrontPageController{
                 $this->authError = true;
             }
             else{
-                FrontPage::auth();
+                if (FrontPage::isVerified($email, $pswd)) {
+                    FrontPage::auth();
+                }
+                else {
+                    $this->notVerified = true;
+                }
+
             }
         }
     }
@@ -67,7 +73,7 @@ class FrontPageController{
                 $this->sendEmail();
                 $hash = password_hash($this->pswd, PASSWORD_DEFAULT);
                 FrontPage::primaryRegister($this->name, $this->lastName, $this->mail, $hash, $this->code);
-                $this->isRegistered = true;
+                header('Location: /', false, 303);
             }
         }
     }
@@ -113,4 +119,5 @@ class FrontPageController{
 
         return true;
     }
+
 }
