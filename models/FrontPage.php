@@ -10,6 +10,7 @@ class FrontPage
 
     public static function checkCredentials($email, $password) {
         $db = Db::getConnection();
+
         $sql = 'SELECT id FROM USERS'
             .' WHERE email = :email AND password = :password';
         $stmt = $db->prepare($sql);
@@ -55,7 +56,9 @@ class FrontPage
         $sql = 'SELECT isverified FROM users '
             .'WHERE (code = :code AND name = :name)';
         $stmt = $db->prepare($sql);
-        return $stmt->execute(array(':code' => $code, ':name' => $name));
+        print_r($stmt->fetchColumn());
+        $stmt->execute(array(':code' => $code, ':name' => $name));
+        return $stmt->fetchColumn();
     }
 
     public static function checkName($name)

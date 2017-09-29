@@ -102,10 +102,11 @@ class FrontPageController{
 
         if (!FrontPage::checkEmailLink($username, $code)){
             FrontPage::finalRegister($code);
-            echo "User registred";//TODO make relocation to main page
+            require_once(ROOT . '/views/layouts/email-confirmed.php');
+            header( "refresh:5; url=/" );
         }
         else {
-            echo "ne zaebis";
+            header( "refresh:5; url=/" );
         }
 
         return true;

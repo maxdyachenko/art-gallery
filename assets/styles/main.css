@@ -140,3 +140,11 @@ html, body {
 .edit-profile .tab-content {
 	margin-top: 40px;
 }
+
+/* email confirmed page */
+.email-confirm h1, .email-confirm p {
+	text-align: center;
+}
+.email-confirm p {
+	margin-top: 25px;
+}
