@@ -4,37 +4,15 @@
 
 <section class="container news-container content-container">
     <div class="row justify-content-between">
-        <div class="image-container col-12 col-md-4">
-            <img src="assets/img/front-bg.jpg" alt="Your image" class="rounded">
-            <div class="custom-popover">
-                <button type="button" class="btn btn-primary" id="zoom-image">Zoom</button>
-                <button type="button" class="btn btn-danger" id="delete-image" data-toggle="modal" data-target="#delete-image-popup">Delete image</button>
+        <?php foreach($userContent as $key=>$value): ?>
+            <div class="image-container col-12 col-md-4">
+                <img src="assets/img/<?php echo $value; ?>" alt="Your image" class="rounded">
+                <div class="custom-popover">
+                    <button type="button" class="btn btn-primary" id="zoom-image">Zoom</button>
+                    <button type="button" class="btn btn-danger" id="delete-image" data-toggle="modal" data-target="#delete-image-popup">Delete image</button>
+                </div>
             </div>
-        </div>
-
-        <div class="image-container col-12 col-md-4">
-            <img src="assets/img/front-bg.jpg" alt="Your image" class="rounded">
-            <div class="custom-popover">
-                <button type="button" class="btn btn-primary" id="zoom-image">Zoom</button>
-                <button type="button" class="btn btn-danger" id="delete-image" data-toggle="modal" data-target="#delete-image-popup">Delete image</button>
-            </div>
-        </div>
-
-        <div class="image-container col-12 col-md-4">
-            <img src="assets/img/front-bg.jpg" alt="Your image" class="rounded">
-            <div class="custom-popover">
-                <button type="button" class="btn btn-primary" id="zoom-image">Zoom</button>
-                <button type="button" class="btn btn-danger" id="delete-image" data-toggle="modal" data-target="#delete-image-popup">Delete image</button>
-            </div>
-        </div>
-
-        <div class="image-container col-12 col-md-4">
-            <img src="assets/img/front-bg.jpg" alt="Your image" class="rounded">
-            <div class="custom-popover">
-                <button type="button" class="btn btn-primary" id="zoom-image">Zoom</button>
-                <button type="button" class="btn btn-danger" id="delete-image" data-toggle="modal" data-target="#delete-image-popup">Delete image</button>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 
     <nav aria-label="Images pages">
