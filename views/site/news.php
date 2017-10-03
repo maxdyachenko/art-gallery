@@ -5,12 +5,13 @@
 <section class="container news-container content-container">
     <div class="row justify-content-between">
         <div class="image-container col-12 col-md-4">
-            <form action="/main" method="post">
+            <form action="/main" method="post" id="uploadForm">
                 <div class="button-container">
                     <input type="file" name="file" id="file" class="add-button input-file" />
                     <label for="file">
                         <figure></figure>
                         <p>Choose file...</p>
+                        <div class="invalid-feedback"></div>
                     </label>
                 </div>
                 <button type="submit" class="btn btn-primary">Upload</button>

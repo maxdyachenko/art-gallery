@@ -163,6 +163,7 @@ html, body {
 	position: relative;
 	min-height: 200px;
 	padding: 6px;
+	text-align: center;
 	overflow: hidden;
 }
 
