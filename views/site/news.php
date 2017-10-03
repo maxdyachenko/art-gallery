@@ -5,21 +5,21 @@
 <section class="container news-container content-container">
     <div class="row justify-content-between">
         <div class="image-container col-12 col-md-4">
-            <form action="/main" method="post" id="uploadForm">
+            <form action="/main" method="post" id="uploadForm" enctype="multipart/form-data">
                 <div class="button-container">
                     <input type="file" name="file" id="file" class="add-button input-file" />
                     <label for="file">
                         <figure></figure>
                         <p>Choose file...</p>
-                        <div class="invalid-feedback"></div>
+                        <div class="invalid-feedback <?php if ($this->imgMistake) echo 'visible'; ?>"><?php if ($this->imgMistake) echo $this->imgMistake;?></div>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary" name="upload-image">Upload</button>
             </form>
         </div>
         <?php foreach($userContent as $key=>$value): ?>
             <div class="image-container col-12 col-md-4">
-                <img src="assets/img/<?php echo $value; ?>" alt="Your image" class="rounded">
+                <img src="assets/img/<?php echo "{$_SESSION['id']}/{$value}"; ?>" alt="Your image" class="rounded">
                 <div class="custom-popover">
                     <button type="button" class="btn btn-primary">Zoom</button>
                     <button type="button" class="btn btn-danger" id="delete-image" data-toggle="modal" data-target="#delete-image-popup">Delete image</button>
