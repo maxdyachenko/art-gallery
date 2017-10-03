@@ -4,11 +4,23 @@
 
 <section class="container news-container content-container">
     <div class="row justify-content-between">
+        <div class="image-container col-12 col-md-4">
+            <form action="/main" method="post">
+                <div class="button-container">
+                    <input type="file" name="file" id="file" class="add-button input-file" />
+                    <label for="file">
+                        <figure></figure>
+                        <p>Choose file...</p>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
         <?php foreach($userContent as $key=>$value): ?>
             <div class="image-container col-12 col-md-4">
                 <img src="assets/img/<?php echo $value; ?>" alt="Your image" class="rounded">
                 <div class="custom-popover">
-                    <button type="button" class="btn btn-primary" id="zoom-image">Zoom</button>
+                    <button type="button" class="btn btn-primary">Zoom</button>
                     <button type="button" class="btn btn-danger" id="delete-image" data-toggle="modal" data-target="#delete-image-popup">Delete image</button>
                 </div>
             </div>
@@ -47,5 +59,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="/assets/scripts/news-page.js"></script>
 </body>
 </html>

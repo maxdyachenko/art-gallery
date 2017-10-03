@@ -10,7 +10,7 @@ class FrontPage
     public static function checkCredentials($email, $password) {
         $db = Db::getConnection();
 
-        $sql = 'SELECT id, password FROM USERS'
+        $sql = 'SELECT id, password, name FROM USERS'
             .' WHERE email = :email';
         $stmt = $db->prepare($sql);
         $stmt->execute(array(':email' => $email));
@@ -19,7 +19,14 @@ class FrontPage
         if (!$isEqualPswd){
             return false;
         }
+
+        self::setUserName($row->name);
+
         return $row->id;
+    }
+
+    private static function setUserName($name){
+        $_SESSION['username'] = $name;
     }
 
     public static function isVerified($email) {

@@ -10,9 +10,6 @@
                 <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Add new image</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/edit-profile">Edit profile</a>
             </li>
             <li class="nav-item">
@@ -21,7 +18,7 @@
             <li class="nav-item">
                 <div class="user-block">
                     <img src="assets/img/front-bg.jpg" alt="Your avatar" class="user-avatar">
-                    <p class="caption">Hello, username</p>
+                    <p class="caption">Hello, <?php echo $_SESSION['username']; ?></p>
                 </div>
             </li>
         </ul>
