@@ -36,8 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-
-
     function checkFile() {
         if (getFileSize() > 2000){
             error.classList.add('visible');
@@ -49,8 +47,33 @@ document.addEventListener('DOMContentLoaded', function() {
             error.innerHTML = "Upload only PNG or JPG";
             return false;
         }
+        else{
+            error.classList.remove('visible');
+            error.innerHTML = "";
+        }
         return true;
     }
+
+    var imgToDelete,
+        imgsWrapper = document.getElementsByClassName('images-wrapper')[0],
+        deleteBtn = document.getElementsByClassName('delete-btn')[0];
+
+    $('#delete-image-popup').on('shown.bs.modal', function (e) {
+        imgToDelete = e.relatedTarget.getAttribute('data-name');
+    });
+    
+    deleteBtn.addEventListener('click', function () {
+        $.ajax({
+            type: "POST",
+            url: "/deleteImage",
+            data: {'imgName': imgToDelete},
+            success: function (html) {
+                imgsWrapper.innerHTML =html;
+            }
+        })
+    });
+    
+    
 
 });
 

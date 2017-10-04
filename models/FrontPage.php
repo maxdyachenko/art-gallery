@@ -10,7 +10,7 @@ class FrontPage
     public static function checkCredentials($email, $password) {
         $db = Db::getConnection();
 
-        $sql = 'SELECT id, password, name FROM USERS'
+        $sql = 'SELECT id, password, name FROM users'
             .' WHERE email = :email';
         $stmt = $db->prepare($sql);
         $stmt->execute(array(':email' => $email));
@@ -32,7 +32,7 @@ class FrontPage
     public static function isVerified($email) {
         $db = Db::getConnection();
 
-        $sql = 'SELECT isverified FROM USERS'
+        $sql = 'SELECT isverified FROM users'
             .' WHERE email = :email';
         $stmt = $db->prepare($sql);
         $stmt->execute(array(':email' => $email));

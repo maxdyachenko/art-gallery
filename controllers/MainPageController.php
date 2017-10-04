@@ -17,6 +17,26 @@ class MainPageController{
         return true;
     }
 
+    public function actionDelete(){
+        if (isset($_POST['imgName'])){
+            MainPage::deleteImage($_POST['imgName']);
+            unlink("{$_SERVER['DOCUMENT_ROOT']}/assets/img/{$_SESSION['id']}/{$_POST['imgName']}");
+            $this->updateContent();
+        }
+        return true;
+    }
+
+    public function updateContent(){
+        $userContent = MainPage::getUserContent();
+
+        $html = include_once ROOT . '/views/layouts/add-image-block.php';
+        foreach($userContent as $key=>$value) {
+            $temp = include ROOT . '/views/layouts/image-block.php';
+            $html = $html . $temp;
+        }
+        return $html;
+    }
+
     public function imageUpload() {
         $dirName = "{$_SERVER['DOCUMENT_ROOT']}/assets/img/{$_SESSION['id']}/";
         !file_exists($dirName) ? mkdir($dirName, 0755) : false;
