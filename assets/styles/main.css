@@ -166,12 +166,27 @@ html, body {
 	text-align: center;
 	overflow: hidden;
 }
+.news-container .add-image-block{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
 .news-container .image-container img{
-	position: relative;
+	position: absolute;
 	width: 100%;
-	transform: translate3d(0, 0, 0);
+	height: 100%;
+	top: 0;
+	left: 0;
 	object-fit: cover;
+}
+.news-container .image-container .image {
+	position: relative;
+}
+.news-container .image-container .image:after {
+	content: '';
+	display: block;
+	padding-bottom: 100%;
 }
 
 .custom-popover {
@@ -183,6 +198,54 @@ html, body {
 }
 
 .custom-popover button {
+	cursor: pointer;
+}
+
+#zoom-container{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0%;
+	left: 0;
+	opacity: 0;
+	pointer-events: none;
+	z-index: -1;
+	visibility: hidden;
+	transition: all .5s;
+}
+#zoom-container:after{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0%;
+	left: 0%;
+	background: rgba(0,0,0,.5);
+}
+#zoom-container.open{
+	opacity: 1;
+	pointer-events: auto;
+	z-index: 1;
+	visibility: visible;
+}
+.zoom-popup{
+	position: relative;
+	width: 80%;
+	top: 50%;
+	left: 50%;
+	transform: translate3d(-50%,-50%,0);
+	height: auto;
+	z-index: 999;
+	
+}
+.zoom-popup img{
+	width: 100%;
+}
+.zoom-popup .close-button{
+	position: absolute;
+	right: 0px;
+	top: -40px;
+	color: #fff;
 	cursor: pointer;
 }
 

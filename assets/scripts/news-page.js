@@ -68,10 +68,36 @@ document.addEventListener('DOMContentLoaded', function() {
             url: "/deleteImage",
             data: {'imgName': imgToDelete},
             success: function (html) {
-                imgsWrapper.innerHTML =html;
+                imgsWrapper.innerHTML = html;
+                initListeners();
             }
         })
     });
+
+
+    var zoomPopup = document.getElementById('zoom-container'),
+        zoomBtn = document.getElementsByClassName('zoom-button'),
+        closeBtn = document.getElementsByClassName('close-button')[0],
+        img = zoomPopup.getElementsByTagName('img')[0];
+
+    function initListeners(){
+        for (var i = 0;i < zoomBtn.length; i++) {
+            zoomBtn[i].addEventListener('click', openZoomPopup)
+        }
+    };
+    initListeners();
+
+    function openZoomPopup() {
+        document.body.classList.add('modal-open');
+        zoomPopup.classList.add('open');
+        img.src = this.getAttribute('data-src');
+    }
+
+    closeBtn.addEventListener('click', function(){
+        document.body.classList.remove('modal-open');
+        zoomPopup.classList.remove('open');
+    });
+
     
     
 
