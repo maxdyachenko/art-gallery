@@ -3,8 +3,9 @@
 return array(
     'verify-email\?username=([a-z0-9_-]{2,17})&code=([a-z0-9_-]+)' => 'frontPage/register',
     'edit-profile' => 'editPage/edit',
+    'main/([0-9]+)' => 'mainPage/content/$1',
     'main' => 'mainPage/content',
-    'deleteImage' => 'mainPage/delete',
+    'delete' => 'mainPage/delete',
     'exit' => 'exit/exit',
     '' => 'frontPage/index' // actionIndex в FrontPageController
 );

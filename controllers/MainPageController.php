@@ -1,15 +1,25 @@
 <?php
 require_once(ROOT . '/models/MainPage.php');
+require_once(ROOT . '/components/Pagination.php');
 class MainPageController{
 
     public $imgMistake = null;
+    public $current = 'Home';
+    public $currentPage = 1;
 
-    public function actionContent() {
+    public function actionContent($page = 1) {
         if (!MainPage::isLogged())
             header('Location: /');
 
-        $userContent = MainPage::getUserContent();
+        $this->currentPage = $page;
 
+        $userContent = MainPage::getUserContent($this->currentPage);
+        $totalOfContent = MainPage::getAllContent();
+
+        $pagination = new Pagination($totalOfContent, $this->currentPage, MainPage::ITEMS_ON_PAGE);
+
+        if ($page > $pagination->amount)
+            header('Location: /main/1');
 
         $this->imageUpload();
         require_once(ROOT . '/views/site/news.php');
@@ -18,16 +28,16 @@ class MainPageController{
     }
 
     public function actionDelete(){
-        if (isset($_POST['imgName'])){
-            MainPage::deleteImage($_POST['imgName']);
-            unlink("{$_SERVER['DOCUMENT_ROOT']}/assets/img/{$_SESSION['id']}/{$_POST['imgName']}");
-            $this->updateContent();
+        if (isset($_POST['name'])){
+            MainPage::deleteImage($_POST['name']);
+            unlink("{$_SERVER['DOCUMENT_ROOT']}/assets/img/{$_SESSION['id']}/{$_POST['name']}");
         }
+        header('Location: /main/' . $this->currentPage);
         return true;
     }
 
     public function updateContent(){
-        $userContent = MainPage::getUserContent();
+        $userContent = MainPage::getUserContent($this->currentPage);
 
         $html = include_once ROOT . '/views/layouts/add-image-block.php';
         foreach($userContent as $key=>$value) {

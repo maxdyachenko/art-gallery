@@ -6,10 +6,10 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item <?php if ($this->current == 'Home') echo 'active'; ?>">
                 <a class="nav-link" href="/main">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if ($this->current == 'Edit profile') echo 'active'; ?>">
                 <a class="nav-link" href="/edit-profile">Edit profile</a>
             </li>
             <li class="nav-item">
@@ -17,7 +17,7 @@
             </li>
             <li class="nav-item">
                 <div class="user-block">
-                    <img src="assets/img/front-bg.jpg" alt="Your avatar" class="user-avatar">
+                    <img src="/assets/img/front-bg.jpg" alt="Your avatar" class="user-avatar">
                     <p class="caption">Hello, <?php echo $_SESSION['username']; ?></p>
                 </div>
             </li>

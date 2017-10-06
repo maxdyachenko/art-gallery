@@ -7,19 +7,7 @@
         <?php $this->updateContent(); ?>
     </div>
 
-    <nav aria-label="Images pages">
-        <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
+    <?php echo  $pagination->get(); ?>
 </section>
 
 <div id="delete-image-popup" class="modal fade show" role="dialog">
@@ -29,8 +17,11 @@
                 <p>Delete the image?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary delete-btn" data-dismiss="modal">Confirm</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="/delete" method="post">
+                    <input type="hidden" name="name">
+                    <button type="submit" class="btn btn-primary delete-btn">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </form>
             </div>
         </div>
     </div>
@@ -39,7 +30,7 @@
 <div id="zoom-container">
     <div class="zoom-popup">
         <span class="fa fa-remove fa-2x close-button"></span>
-        <img src="/assets/img/12/1507195191.jpg" alt="">
+        <img src="" alt="">
     </div>
 </div>
 

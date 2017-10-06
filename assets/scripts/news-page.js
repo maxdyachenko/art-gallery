@@ -54,25 +54,29 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    var imgToDelete,
-        imgsWrapper = document.getElementsByClassName('images-wrapper')[0],
-        deleteBtn = document.getElementsByClassName('delete-btn')[0];
-
+    // var imgToDelete,
+    //     imgsWrapper = document.getElementsByClassName('images-wrapper')[0],
+    //     deleteBtn = document.getElementsByClassName('delete-btn')[0];
+    //
     $('#delete-image-popup').on('shown.bs.modal', function (e) {
-        imgToDelete = e.relatedTarget.getAttribute('data-name');
+        var imgName = e.relatedTarget.getAttribute('data-name');
+        var input = this.getElementsByTagName('input')[0];
+        input.setAttribute('value',imgName);
     });
-    
-    deleteBtn.addEventListener('click', function () {
-        $.ajax({
-            type: "POST",
-            url: "/deleteImage",
-            data: {'imgName': imgToDelete},
-            success: function (html) {
-                imgsWrapper.innerHTML = html;
-                initListeners();
-            }
-        })
-    });
+
+    // deleteBtn.addEventListener('click', function () {
+    //     var imgName = imgRelatedButton.getAttribute('data-name');
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/deleteImage",
+    //         data: {'imgName': imgName},
+    //         success: function (html) {
+    //             deleteImage();
+    //         }
+    //     })
+    // });
+
+
 
 
     var zoomPopup = document.getElementById('zoom-container'),
@@ -80,12 +84,10 @@ document.addEventListener('DOMContentLoaded', function() {
         closeBtn = document.getElementsByClassName('close-button')[0],
         img = zoomPopup.getElementsByTagName('img')[0];
 
-    function initListeners(){
-        for (var i = 0;i < zoomBtn.length; i++) {
-            zoomBtn[i].addEventListener('click', openZoomPopup)
-        }
-    };
-    initListeners();
+
+    for (var i = 0;i < zoomBtn.length; i++) {
+        zoomBtn[i].addEventListener('click', openZoomPopup)
+    }
 
     function openZoomPopup() {
         document.body.classList.add('modal-open');
