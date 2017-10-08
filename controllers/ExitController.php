@@ -1,8 +1,7 @@
 <?php
-require_once(ROOT . '/models/ExitModel.php');
 class ExitController{
     public function actionExit(){
-        ExitModel::logOut();
+        unset($_SESSION['id'], $_SESSION['username']);
         header('Location: /');
         return true;
     }
