@@ -19,13 +19,15 @@ li {
 .hidden {
 	display: none;
 }
-
+html{
+	position: relative;
+	min-height: 100%;
+}
 html, body {
 	width: 100%;
-	height: 100%;
 }
-body {
-	position: relative;
+body{
+	padding-bottom: 80px;
 }
 
 
@@ -91,14 +93,8 @@ body {
 
 /* news styles */
 .content {
-	padding-top: 40px;
-	min-height: calc(100% - 123px);
-	margin-bottom: -80px;
-}
-.content:after {
-	content:'';
-	display: block;
-	height: 80px;
+	padding-top: 20px;
+	margin-bottom: 20px;
 }
 
 .image-container .button-container{
@@ -279,6 +275,9 @@ body {
 
 /* footer styles */
 footer{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 	padding: 20px;
 	color: #fff;
 }
