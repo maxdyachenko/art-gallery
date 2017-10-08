@@ -14,6 +14,10 @@ class FrontPageController
     public $authError;
     public $notVerified = false;
 
+    public function __construct(){
+        $this->model = new FrontPage();
+    }
+
     public function actionIndex()
     {
         $this->authFieldsValidate();
@@ -31,14 +35,14 @@ class FrontPageController
             $pswd = $this->safeInput($_POST['authPswd']);
 
 
-            if (!FrontPage::checkEmail($email) || !FrontPage::checkEmailExists($email) || !FrontPage::checkPswd($pswd)) {
+            if (!$this->model->checkEmail($email) || !$this->model->checkEmailExists($email) || !$this->model->checkPswd($pswd)) {
                 $this->authError = true;
             } else {
-                $userId = FrontPage::checkCredentials($email, $pswd);
+                $userId = $this->model->checkCredentials($email, $pswd);
                 if (!$userId) {
                     $this->authError = true;
-                } else if (FrontPage::isVerified($email)){
-                    FrontPage::auth($userId);
+                } else if ($this->model->isVerified($email)){
+                    $this->model->auth($userId);
                     header('Location: /main');
                 } else{
                     $this->notVerified = true;
@@ -56,22 +60,22 @@ class FrontPageController
             $this->pswd = $this->safeInput($_POST['regPswd']);
             $this->pswd2 = $this->safeInput($_POST['regPswd2']);
 
-            if (!FrontPage::checkName($this->name)) {
+            if (!$this->model->checkName($this->name)) {
                 $this->errors['name'] = 1;
             }
-            if (!FrontPage::checkName($this->lastName)) {
+            if (!$this->model->checkName($this->lastName)) {
                 $this->errors['lastName'] = 1;
             }
-            if (!FrontPage::checkPswd($this->pswd)) {
+            if (!$this->model->checkPswd($this->pswd)) {
                 $this->errors['pswd'] = 1;
             }
-            if (!FrontPage::checkPswd2($this->pswd, $this->pswd2)) {
+            if (!$this->model->checkPswd2($this->pswd, $this->pswd2)) {
                 $this->errors['pswd2'] = 1;
             }
-            if (!FrontPage::checkEmail($this->mail)) {
+            if (!$this->model->checkEmail($this->mail)) {
                 $this->errors['mail'] = 1;
             }
-            if (FrontPage::checkEmailExists($this->mail)) {
+            if ($this->model->checkEmailExists($this->mail)) {
                 $this->errors['mail'] = 2; //hack to show another mistake in view file
             }
 
@@ -80,7 +84,7 @@ class FrontPageController
                 $this->code = bin2hex($bytes);
                 $this->sendEmail();
                 $hash = password_hash($this->pswd, PASSWORD_DEFAULT);
-                FrontPage::primaryRegister($this->name, $this->lastName, $this->mail, $hash, $this->code);
+                $this->model->primaryRegister($this->name, $this->lastName, $this->mail, $hash, $this->code);
                 header('Location: /', false, 303);
             }
         }
@@ -119,8 +123,8 @@ class FrontPageController
         $username = $this->safeInput($_GET['username']);
         $code = $this->safeInput($_GET['code']);
 
-        if (!FrontPage::checkEmailLink($username, $code)) {
-            FrontPage::finalRegister($code);
+        if (!$this->model->checkEmailLink($username, $code)) {
+            $this->model->finalRegister($code);
             require_once(ROOT . '/views/layouts/email-confirmed.php');
             header("refresh:5; url=/");
         } else {

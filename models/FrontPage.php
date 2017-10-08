@@ -1,18 +1,21 @@
 <?php
 require_once(ROOT . '/components/Db.php');
 
-class FrontPage
-{
-    public static function auth($id) {
+class FrontPage{
+
+    public function __construct(){
+        $this->db = Db::getConnection();
+    }
+
+    public function auth($id) {
         $_SESSION['id'] = $id;
     }
 
-    public static function checkCredentials($email, $password) {
-        $db = Db::getConnection();
+    public function checkCredentials($email, $password) {
 
         $sql = 'SELECT id, password, name FROM users'
             .' WHERE email = :email';
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute(array(':email' => $email));
         $row = $stmt->fetch(PDO::FETCH_LAZY);
         $isEqualPswd = password_verify($password , $row->password);
@@ -20,63 +23,56 @@ class FrontPage
             return false;
         }
 
-        self::setUserName($row->name);
+        $this->setUserName($row->name);
 
         return $row->id;
     }
 
-    private static function setUserName($name){
+    private function setUserName($name){
         $_SESSION['username'] = $name;
     }
 
-    public static function isVerified($email) {
-        $db = Db::getConnection();
+    public function isVerified($email) {
+        $this->db = Db::getConnection();
 
         $sql = 'SELECT isverified FROM users'
             .' WHERE email = :email';
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute(array(':email' => $email));
         return $stmt->fetchColumn();
     }
 
-    public static function finalRegister($code)
+    public function finalRegister($code)
     {
-
-        $db = Db::getConnection();
-
         $sql = 'UPDATE users SET isverified = 1 '
             . 'WHERE code = :code';
 
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':code', $code, PDO::PARAM_INT);
 
         return $stmt->execute();
     }
 
-    public static function primaryRegister($name, $lastName, $email, $password, $code)
+    public function primaryRegister($name, $lastName, $email, $password, $code)
     {
-
-        $db = Db::getConnection();
-
         $sql = 'INSERT INTO users (name,lastName,email,password,code) '
             . 'VALUES (:name,:lastname,:email,:password,:code)';
 
-        $result = $db->prepare($sql);
+        $result = $this->db->prepare($sql);
 
         $result->execute(array(':name' => $name, ':lastname' => $lastName, ':email' => $email, ':password' => $password, ':code' => $code));
     }
 
-    public static function checkEmailLink($name, $code) {
-        $db = Db::getConnection();
+    public function checkEmailLink($name, $code) {
         $sql = 'SELECT isverified FROM users '
             .'WHERE (code = :code AND name = :name)';
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         print_r($stmt->fetchColumn());
         $stmt->execute(array(':code' => $code, ':name' => $name));
         return $stmt->fetchColumn();
     }
 
-    public static function checkName($name)
+    public function checkName($name)
     {
         if (strlen($name) >= 2 && strlen($name) <= 16) {
             return true;
@@ -85,7 +81,7 @@ class FrontPage
     }
 
 
-    public static function checkPswd($pswd)
+    public function checkPswd($pswd)
     {
         if (strlen($pswd) >= 6 && strlen($pswd) <= 16) {
             return true;
@@ -93,7 +89,7 @@ class FrontPage
         return false;
     }
 
-    public static function checkPswd2($pswd, $pswd2)
+    public function checkPswd2($pswd, $pswd2)
     {
         if (!strcmp($pswd, $pswd2)) {
             return true;
@@ -101,7 +97,7 @@ class FrontPage
         return false;
     }
 
-    public static function checkEmail($email)
+    public function checkEmail($email)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;
@@ -109,14 +105,12 @@ class FrontPage
         return false;
     }
 
-    public static function checkEmailExists($email)
+    public function checkEmailExists($email)
     {
-
-        $db = Db::getConnection();
 
         $sql = 'SELECT COUNT(*) FROM users WHERE email = :email';
 
-        $result = $db->prepare($sql);
+        $result = $this->db->prepare($sql);
         $result->bindParam(':email', $email, PDO::PARAM_STR);
         $result->execute();
 
