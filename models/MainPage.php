@@ -20,6 +20,14 @@ class MainPage{
         return false;
     }
 
+    public function getUserAvatar(){
+        $sql = 'SELECT avatar FROM users'
+            .' WHERE id = :id';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array(':id' => $this->id));
+        return $stmt->fetchColumn();
+    }
+
     public function uploadImage($imageName) {
 
         $sql = 'INSERT INTO users_imgs (user_id, user_img)'

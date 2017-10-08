@@ -1,13 +1,14 @@
 <?php
-
-class MainPageController{
+class MainPageController {
 
     public $imgMistake = null;
     public $current = 'Home';
     public $currentPage = 1;
+    public $userAvatar = null;
 
     public function __construct(){
         $this->model = new MainPage(Db::getConnection());
+        $this->userAvatar = $this->model->getUserAvatar();
     }
 
 

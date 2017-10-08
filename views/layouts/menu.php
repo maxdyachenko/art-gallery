@@ -17,7 +17,7 @@
             </li>
             <li class="nav-item">
                 <div class="user-block">
-                    <img src="/assets/img/front-bg.jpg" alt="Your avatar" class="user-avatar">
+                    <img src="<?php if ($this->userAvatar) echo $this->userAvatar; else echo '/assets/img/noavatar.jpg'; ?>" alt="Your avatar" class="user-avatar">
                     <p class="caption">Hello, <?php echo $_SESSION['username']; ?></p>
                 </div>
             </li>
