@@ -60,6 +60,7 @@ class MainPage{
 
         $sql = 'SELECT user_img FROM  users_imgs'
             . ' WHERE user_id = :user_id'
+            . ' ORDER BY id DESC'
             . ' LIMIT '. $count
             . ' OFFSET '. $ofset;
         $stmt = $this->db->prepare($sql);

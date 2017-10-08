@@ -27,7 +27,6 @@ class MainPageController{
         if ($page > $pagination->amount)
             header('Location: /main/1');
 
-        $this->imageUpload();
         require_once(ROOT . '/views/site/news.php');
 
         return true;
@@ -53,7 +52,7 @@ class MainPageController{
         return $html;
     }
 
-    public function imageUpload() {
+    public function actionImageUpload() {
         $dirName = "{$_SERVER['DOCUMENT_ROOT']}/assets/img/{$_SESSION['id']}/";
         !file_exists($dirName) ? mkdir($dirName, 0755) : false;
         if (isset($_POST['upload-image'])){
@@ -66,6 +65,8 @@ class MainPageController{
                 header('Location: /main');
             }
         }
+        header('Location: /main');
+        return true;
     }
 
 }

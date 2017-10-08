@@ -1,5 +1,5 @@
 <div class="image-container col-12 col-md-4 add-image-block">
-    <form action="/main" method="post" id="uploadForm" enctype="multipart/form-data">
+    <form action="/upload-image" method="post" id="uploadForm" enctype="multipart/form-data">
         <div class="button-container">
             <input type="file" name="file" id="file" class="add-button input-file" />
             <label for="file">
