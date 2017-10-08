@@ -1,5 +1,4 @@
 <?php
-require_once(ROOT . '/models/FrontPage.php');
 
 class FrontPageController
 {
@@ -15,7 +14,7 @@ class FrontPageController
     public $notVerified = false;
 
     public function __construct(){
-        $this->model = new FrontPage();
+        $this->model = new FrontPage(Db::getConnection());
     }
 
     public function actionIndex()

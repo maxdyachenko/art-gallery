@@ -2,76 +2,77 @@
 <body class="edit-profile">
 <?php include ROOT . '/views/layouts/menu.php' ?>
 
-<section class="container content-container">
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Name</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Password</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Avatar</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Email</a>
-        </li>
-    </ul>
+<div class="content">
+    <section class="container content-container">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Name</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Avatar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Email</a>
+            </li>
+        </ul>
 
-    <div class="tab-content">
-        <div class="tab-pane active" id="home" role="tabpanel">
-            <form>
-                <div class="form-group">
-                    <label for="nameInput">First Name</label>
-                    <input type="text" class="form-control" id="nameInput" aria-describedby="lastName" placeholder="Enter New First Name">
-                </div>
-                <div class="form-group">
-                    <label for="lastNameInput">Last Name</label>
-                    <input type="text" class="form-control" id="lastNameInput" aria-describedby="lastName" placeholder="Enter New Last Name">
-                </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="home" role="tabpanel">
+                <form>
+                    <div class="form-group">
+                        <label for="nameInput">First Name</label>
+                        <input type="text" class="form-control" id="nameInput" aria-describedby="lastName" placeholder="Enter New First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastNameInput">Last Name</label>
+                        <input type="text" class="form-control" id="lastNameInput" aria-describedby="lastName" placeholder="Enter New Last Name">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="tab-pane" id="profile" role="tabpanel">
+                <form>
+                    <div class="form-group">
+                        <label for="InputPassword1">Old Password</label>
+                        <input type="password" class="form-control" id="InputPassword1" placeholder="Old Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="InputPassword2">New Password</label>
+                        <input type="password" class="form-control" id="InputPassword2" placeholder="New Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="InputPassword3">Confrim New Password</label>
+                        <input type="password" class="form-control" id="InputPassword3" placeholder="Confrim New Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="tab-pane" id="messages" role="tabpanel">
+                <label class="custom-file">
+                    <input type="file" id="file2" class="custom-file-input">
+                    <span class="custom-file-control"></span>
+                </label>
+            </div>
+            <div class="tab-pane" id="settings" role="tabpanel">
+                <form>
+                    <div class="form-group">
+                        <label for="InputEmail1">Old Email address</label>
+                        <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter Old email">
+                    </div>
+                    <div class="form-group">
+                        <label for="InputEmail2">New Email address</label>
+                        <input type="email" class="form-control" id="InputEmail2" aria-describedby="emailHelp" placeholder="Enter New email">
+                    </div>
+                </form>
                 <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
         </div>
-        <div class="tab-pane" id="profile" role="tabpanel">
-            <form>
-                <div class="form-group">
-                    <label for="InputPassword1">Old Password</label>
-                    <input type="password" class="form-control" id="InputPassword1" placeholder="Old Password">
-                </div>
-                <div class="form-group">
-                    <label for="InputPassword2">New Password</label>
-                    <input type="password" class="form-control" id="InputPassword2" placeholder="New Password">
-                </div>
-                <div class="form-group">
-                    <label for="InputPassword3">Confrim New Password</label>
-                    <input type="password" class="form-control" id="InputPassword3" placeholder="Confrim New Password">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-        <div class="tab-pane" id="messages" role="tabpanel">
-            <label class="custom-file">
-                <input type="file" id="file2" class="custom-file-input">
-                <span class="custom-file-control"></span>
-            </label>
-        </div>
-        <div class="tab-pane" id="settings" role="tabpanel">
-            <form>
-                <div class="form-group">
-                    <label for="InputEmail1">Old Email address</label>
-                    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter Old email">
-                </div>
-                <div class="form-group">
-                    <label for="InputEmail2">New Email address</label>
-                    <input type="email" class="form-control" id="InputEmail2" aria-describedby="emailHelp" placeholder="Enter New email">
-                </div>
-            </form>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
-</section>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    </section>
+</div>
+
+<?php include ROOT . '/views/layouts/footer.php' ?>
 </body>
 </html>

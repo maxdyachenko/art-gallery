@@ -1,10 +1,9 @@
 <?php
-require_once(ROOT . '/components/Db.php');
 
 class FrontPage{
 
-    public function __construct(){
-        $this->db = Db::getConnection();
+    public function __construct($db){
+        $this->db = $db;
     }
 
     public function auth($id) {

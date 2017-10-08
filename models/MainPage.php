@@ -1,5 +1,5 @@
 <?php
-require_once(ROOT . '/components/Db.php');
+
 class MainPage{
 
     public $db;
@@ -7,11 +7,10 @@ class MainPage{
 
     const ITEMS_ON_PAGE = 5;
 
-    public function __construct(){
-        $this->db = Db::getConnection();
+    public function __construct($db){
+        $this->db = $db;
         $this->id = $_SESSION['id'];
     }
-
 
     public function isLogged()
     {

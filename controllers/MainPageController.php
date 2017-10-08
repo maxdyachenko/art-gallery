@@ -1,7 +1,5 @@
 <?php
-require_once(ROOT . '/models/MainPage.php');
-require_once(ROOT . '/components/Pagination.php');
-require_once(ROOT . '/models/Avatar.php');
+
 class MainPageController{
 
     public $imgMistake = null;
@@ -9,7 +7,7 @@ class MainPageController{
     public $currentPage = 1;
 
     public function __construct(){
-        $this->model = new MainPage();
+        $this->model = new MainPage(Db::getConnection());
     }
 
 
