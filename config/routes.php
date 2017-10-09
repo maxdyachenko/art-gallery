@@ -8,5 +8,6 @@ return array(
     'main' => 'mainPage/content',
     'delete' => 'mainPage/delete',
     'exit' => 'exit/exit',
+    'auth' => 'frontPage/auth',
     '' => 'frontPage/index' // actionIndex в FrontPageController
 );

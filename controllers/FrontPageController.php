@@ -10,8 +10,6 @@ class FrontPageController
     private $code;
 
     public $errors = [];
-    public $authError;
-    public $notVerified = false;
 
     public function __construct(){
         $this->model = new FrontPage(Db::getConnection());
@@ -19,35 +17,35 @@ class FrontPageController
 
     public function actionIndex()
     {
-        $this->authFieldsValidate();
         $this->regFieldsValidate();
 
         require_once(ROOT . '/views/site/index.php');
         return true;
     }
 
-    public function authFieldsValidate()
-    {
-        if (isset($_POST['auth'])) {
-            $this->authError = false;
+    public function actionAuth() {
+        $error = null;
+        if (isset($_POST['authEmail']) && isset($_POST['authPswd'])) {
             $email = $this->safeInput($_POST['authEmail']);
             $pswd = $this->safeInput($_POST['authPswd']);
 
 
             if (!$this->model->checkEmail($email) || !$this->model->checkEmailExists($email) || !$this->model->checkPswd($pswd)) {
-                $this->authError = true;
+                $error = "Password or email is incorrect";
             } else {
                 $userId = $this->model->checkCredentials($email, $pswd);
                 if (!$userId) {
-                    $this->authError = true;
+                    $error = "Password or email is incorrect";
                 } else if ($this->model->isVerified($email)){
                     $this->model->auth($userId);
-                    header('Location: /main');
+                    $error = "No errors";
                 } else{
-                    $this->notVerified = true;
+                    $error = "Email is not verified";
                 }
             }
         }
+        echo $error;
+        return true;
     }
 
     public function regFieldsValidate()

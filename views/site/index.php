@@ -1,19 +1,14 @@
 <?php include ROOT . '/views/layouts/head.php' ?>
 <body class="front-page">
-<?php if ($this->notVerified): ?>
-    <div class="alert alert-danger alert-email-check" role="alert">
-        Confirm your email to authorize!
-    </div>
-<?php endif; ?>
-<a href="news.html">News</a>
+<div class="alert alert-danger alert-email-check hidden" role="alert">
+</div>
 <div class="container-fluid">
     <div class="row justify-content-between">
         <div class="col-md-3">
 
         </div>
         <div class="col-md-3 front-box">
-            <form class="sign-in <?php if (isset($this->errors) && !empty($this->errors)) echo 'disable' ?>" method="post"
-                  action="/">
+            <form action="/auth" class="sign-in <?php if (isset($this->errors) && !empty($this->errors)) echo 'disable' ?>" method="post">
                 <div class="form-group">
                     <label for="InputEmail1">Email address</label>
                     <input type="email" class="form-control" id="authEmail" aria-describedby="emailHelp"
@@ -24,7 +19,6 @@
                     <label for="InputPassword1">Password</label>
                     <input type="password" class="form-control" id="InputPassword1" placeholder="Password"
                            name="authPswd">
-                    <div class="invalid-feedback <?php if ($this->authError) echo 'visible'; else var_dump($this->authError);?>">Password or email is incorrect</div>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
@@ -33,8 +27,8 @@
                     </label>
                 </div>
                 <div class="buttons-container">
-                    <button type="submit" class="btn btn-primary" name="auth">Sign in</button>
-                    <button type="submit" class="btn btn-primary" id="signup-button">Sign up</button>
+                    <button type="button" class="btn btn-primary" name="auth" id="signin-button">Sign in</button>
+                    <button type="button" class="btn btn-primary" id="signup-button">Sign up</button>
                 </div>
             </form>
             <form class="sign-up <?php if (isset($this->errors) && !empty($this->errors)) echo 'active'; ?>" action="/"
@@ -92,6 +86,7 @@
         </div>
     </div>
 </div>
+<?php include ROOT . '/views/layouts/footer.php' ?>
 <script src="/assets/scripts/front-page.js"></script>
 </body>
 </html>

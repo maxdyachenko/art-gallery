@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var signupButton = document.getElementById('signup-button'),
+        signinButton = document.getElementById('signin-button'),
         signupForm = document.getElementsByClassName('sign-up')[0],
         registerButton = document.getElementById('registerButton'),
         authEmail = document.getElementById('authEmail'),
@@ -19,10 +20,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     signupForm.addEventListener('submit', validateRegForm);
-    signinForm.addEventListener('submit', validateAuthForm);
+    signinButton.addEventListener('click', validateAuthForm);
 
     function validateAuthForm() {
-        !isCorrectEmail(authEmail)? addMistakeClass(authEmail): removeMistakeClass(authEmail);
+        if (!isCorrectEmail(authEmail)){
+            addMistakeClass(authEmail);
+            return;
+        } else{
+            removeMistakeClass(authEmail);
+        }
+        sendAuth();
+    }
+    function sendAuth() {
+        var data = $('.sign-in').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "/auth",
+            data: data,
+            success: function (data) {
+                if (data === "No errors") {
+                    window.location.href = '/main';
+                } else{
+                    $('.alert-danger').html(data).addClass('visible');
+                    $('.sign-in')[0].reset();
+                }
+            }
+        })
     }
 
     function validateRegForm() {
