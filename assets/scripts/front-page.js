@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var signupButton = document.getElementById('signup-button'),
+    var html = document.getElementsByTagName('html')[0],
+        signupButton = document.getElementById('signup-button'),
         signinButton = document.getElementById('signin-button'),
         signupForm = document.getElementsByClassName('sign-up')[0],
         registerButton = document.getElementById('registerButton'),
@@ -11,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
         regLastName = document.getElementById('regLastName'),
         signinForm = document.getElementsByClassName('sign-in')[0];
 
+
+    html.classList.add('height-custom');//hack for this page to make flex work correct
 
     //activate animation
     signupButton.addEventListener('click', function () {

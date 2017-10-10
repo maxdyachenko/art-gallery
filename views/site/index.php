@@ -86,7 +86,7 @@
         </div>
     </div>
 </div>
-<?php include ROOT . '/views/layouts/footer.php' ?>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script src="/assets/scripts/front-page.js"></script>
 </body>
 </html>

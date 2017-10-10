@@ -31,9 +31,14 @@ body{
 }
 
 
+.height-custom{
+	height: 100%;
+}
 .front-page {
 	display: flex;
 	align-items: center;
+	height: 100%;
+	padding-bottom: 0;
 	background: url(../img/front-bg.jpg) center center / cover no-repeat;
 }
 .alert-email-check {
@@ -208,7 +213,13 @@ body{
 .custom-popover button {
 	cursor: pointer;
 }
+.pagination-container{
+	margin-top: 20px;
+}
 
+.page-link{
+	z-index: 1 !important;
+}
 #zoom-container{
 	position: fixed;
 	width: 100%;
@@ -237,17 +248,19 @@ body{
 	visibility: visible;
 }
 .zoom-popup{
+	display: table;
 	position: relative;
-	width: 80%;
+	max-height: 80%;
 	top: 50%;
 	left: 50%;
 	transform: translate3d(-50%,-50%,0);
 	height: auto;
 	z-index: 999;
+	text-align: center;
 	
 }
 .zoom-popup img{
-	width: 100%;
+	max-width: 100%;
 }
 .zoom-popup .close-button{
 	position: absolute;

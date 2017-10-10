@@ -19,7 +19,7 @@ class Pagination{
     }
 
     public function get(){
-        $html = '<nav aria-label="Images pages"><ul class="pagination justify-content-end">';
+        $html = '<nav aria-label="Images pages" class="pagination-container"><ul class="pagination justify-content-end">';
         $html .= $this->getPreviousButton();
 
         $html .= $this->getPages();
