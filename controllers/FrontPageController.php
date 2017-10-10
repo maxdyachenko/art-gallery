@@ -26,8 +26,8 @@ class FrontPageController
     public function actionAuth() {
         $error = null;
         if (isset($_POST['authEmail']) && isset($_POST['authPswd'])) {
-            $email = $this->safeInput($_POST['authEmail']);
-            $pswd = $this->safeInput($_POST['authPswd']);
+            $email = FrontPage::safeInput($_POST['authEmail']);
+            $pswd = FrontPage::safeInput($_POST['authPswd']);
 
 
             if (!$this->model->checkEmail($email) || !$this->model->checkEmailExists($email) || !$this->model->checkPswd($pswd)) {
@@ -51,11 +51,11 @@ class FrontPageController
     public function regFieldsValidate()
     {
         if (isset($_POST['register'])) {
-            $this->name = $this->safeInput($_POST['regName']);
-            $this->lastName = $this->safeInput($_POST['regLastName']);
-            $this->mail = $this->safeInput($_POST['regEmail']);
-            $this->pswd = $this->safeInput($_POST['regPswd']);
-            $this->pswd2 = $this->safeInput($_POST['regPswd2']);
+            $this->name = FrontPage::safeInput($_POST['regName']);
+            $this->lastName = FrontPage::safeInput($_POST['regLastName']);
+            $this->mail = FrontPage::safeInput($_POST['regEmail']);
+            $this->pswd = FrontPage::safeInput($_POST['regPswd']);
+            $this->pswd2 = FrontPage::safeInput($_POST['regPswd2']);
 
             if (!$this->model->checkName($this->name)) {
                 $this->errors['name'] = 1;
@@ -107,18 +107,11 @@ class FrontPageController
         mail($to, $subject, $message, $headers);
     }
 
-    public function safeInput($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
 
     public function actionRegister()
     {
-        $username = $this->safeInput($_GET['username']);
-        $code = $this->safeInput($_GET['code']);
+        $username = FrontPage::safeInput($_GET['username']);
+        $code = FrontPage::safeInput($_GET['code']);
 
         if (!$this->model->checkEmailLink($username, $code)) {
             $this->model->finalRegister($code);

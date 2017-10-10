@@ -12,7 +12,7 @@ class MainPage{
         $this->id = $this->isLogged();
     }
 
-    public function isLogged()
+    public static function isLogged()
     {
         if (isset($_SESSION['id'])) {
             return $_SESSION['id'];

@@ -70,20 +70,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function isCorrectPswd() {
-        if (regPswd.value.length > 5 && element.value.length < 17)
-            return true;
-        return false;
+        return regPswd.value.length > 5 && element.value.length < 17;
     }
 
     function isCorrectName(element){
-        if (element.value.length > 1 && element.value.length < 17)
-            return true;
-        return false;
+        return element.value.length > 1 && element.value.length < 17;
     }
     function isConfirmedPswd() {
-        if (regPswd.value === regPswd2.value)
-            return true;
-        return false;
+        return regPswd.value === regPswd2.value;
     }
 
     function isCorrectEmail(email) {

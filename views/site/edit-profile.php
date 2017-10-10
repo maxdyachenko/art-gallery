@@ -21,16 +21,18 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="home" role="tabpanel">
-                <form>
+                <form action="/edit-profile" method="post" class="user-edit-form">
                     <div class="form-group">
                         <label for="nameInput">First Name</label>
-                        <input type="text" class="form-control" id="nameInput" aria-describedby="lastName" placeholder="Enter New First Name">
+                        <input type="text" class="form-control" name="userName" id="nameInput" aria-describedby="lastName" placeholder="Enter New First Name">
+                        <div class="invalid-feedback">Name should be min 2 chars max 16 chars</div>
                     </div>
                     <div class="form-group">
                         <label for="lastNameInput">Last Name</label>
-                        <input type="text" class="form-control" id="lastNameInput" aria-describedby="lastName" placeholder="Enter New Last Name">
+                        <input type="text" class="form-control" id="lastNameInput" name="userLastName" aria-describedby="lastName" placeholder="Enter New Last Name">
+                        <div class="invalid-feedback">Last Name should be min 2 chars max 16 chars</div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="editNameForm">Submit</button>
                 </form>
             </div>
             <div class="tab-pane" id="profile" role="tabpanel">
@@ -74,5 +76,6 @@
 </div>
 
 <?php include ROOT . '/views/layouts/footer.php' ?>
+<script src="/assets/scripts/edit-page.js"></script>
 </body>
 </html>
