@@ -8,14 +8,15 @@ class MainPageController {
 
     public function __construct(){
         $this->model = new MainPage(Db::getConnection());
+        if (!$this->model->isLogged()) {
+            header('Location: /');
+            exit;
+        }
         $this->userAvatar = $this->model->getUserAvatar();
     }
 
 
     public function actionContent($page = 1) {
-        if (!$this->model->isLogged())
-            header('Location: /');
-
         $this->currentPage = $page;
 
         $userContent = $this->model->getUserContent($this->currentPage);

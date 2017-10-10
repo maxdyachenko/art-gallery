@@ -9,7 +9,7 @@ class MainPage{
 
     public function __construct($db){
         $this->db = $db;
-        $this->id = $_SESSION['id'];
+        $this->id = $this->isLogged();
     }
 
     public function isLogged()
