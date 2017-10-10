@@ -275,6 +275,9 @@ body{
 .edit-profile .tab-content {
 	margin-top: 40px;
 }
+.avatar-edit-form button{
+	margin-top: 20px;
+}
 
 
 /* email confirmed page */

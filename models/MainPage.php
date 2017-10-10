@@ -36,7 +36,7 @@ class MainPage{
         $stmt->execute(array(':id' => $this->id, ':imageName' => $imageName));
     }
 
-    public function getImageMistake() {
+    public static function getImageMistake() {
         $imgMistake = '';
         if (!getimagesize($_FILES['file']['tmp_name'])){
             $imgMistake = "Please upload an image";

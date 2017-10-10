@@ -22,12 +22,12 @@ class FrontPage{
             return false;
         }
 
-        $this->setUserName($row->name);
+        self::setUserName($row->name);
 
         return $row->id;
     }
 
-    private function setUserName($name){
+    public static function setUserName($name){
         $_SESSION['username'] = $name;
     }
 
@@ -71,7 +71,7 @@ class FrontPage{
         return $stmt->fetchColumn();
     }
 
-    public function checkName($name)
+    public static function checkName($name)
     {
         if (strlen($name) >= 2 && strlen($name) <= 16) {
             return true;
@@ -80,7 +80,7 @@ class FrontPage{
     }
 
 
-    public function checkPswd($pswd)
+    public static function checkPswd($pswd)
     {
         if (strlen($pswd) >= 6 && strlen($pswd) <= 16) {
             return true;

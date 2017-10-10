@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function isCorrectPswd() {
-        return regPswd.value.length > 5 && element.value.length < 17;
+        return regPswd.value.length > 5 && regPswd.value.length < 17;
     }
 
     function isCorrectName(element){

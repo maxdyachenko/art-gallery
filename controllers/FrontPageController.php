@@ -57,13 +57,13 @@ class FrontPageController
             $this->pswd = FrontPage::safeInput($_POST['regPswd']);
             $this->pswd2 = FrontPage::safeInput($_POST['regPswd2']);
 
-            if (!$this->model->checkName($this->name)) {
+            if (!FrontPage::checkName($this->name)) {
                 $this->errors['name'] = 1;
             }
-            if (!$this->model->checkName($this->lastName)) {
+            if (!FrontPage::checkName($this->lastName)) {
                 $this->errors['lastName'] = 1;
             }
-            if (!$this->model->checkPswd($this->pswd)) {
+            if (!FrontPage::checkPswd($this->pswd)) {
                 $this->errors['pswd'] = 1;
             }
             if (!$this->model->checkPswd2($this->pswd, $this->pswd2)) {

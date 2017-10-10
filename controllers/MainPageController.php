@@ -56,7 +56,7 @@ class MainPageController {
         $dirName = "{$_SERVER['DOCUMENT_ROOT']}/assets/img/{$_SESSION['id']}/";
         !file_exists($dirName) ? mkdir($dirName, 0755) : false;
         if (isset($_POST['upload-image'])){
-            $this->imgMistake = $this->model->getImageMistake();
+            $this->imgMistake = MainPage::getImageMistake();
             if (!$this->imgMistake) {
                 $temp = explode(".", $_FILES['file']['name']);
                 $newfilename = round(microtime(true)) . '.' . end($temp);

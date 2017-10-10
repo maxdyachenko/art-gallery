@@ -6,70 +6,59 @@
     <section class="container content-container">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Name</a>
+                <a class="nav-link <?php if ($this->activeTab == 1) echo 'active' ?>" data-toggle="tab" href="#name" role="tab">Name</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Password</a>
+                <a class="nav-link <?php if ($this->activeTab == 2) echo 'active' ?>" data-toggle="tab" href="#pswd" role="tab">Password</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Avatar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Email</a>
+                <a class="nav-link" data-toggle="tab" href="#avatar" role="tab">Avatar</a>
             </li>
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane active" id="home" role="tabpanel">
+            <div class="tab-pane <?php if ($this->activeTab == 1) echo 'active' ?>" id="name" role="tabpanel">
                 <form action="/edit-profile" method="post" class="user-edit-form">
                     <div class="form-group">
                         <label for="nameInput">First Name</label>
                         <input type="text" class="form-control" name="userName" id="nameInput" aria-describedby="lastName" placeholder="Enter New First Name">
-                        <div class="invalid-feedback">Name should be min 2 chars max 16 chars</div>
+                        <div class="invalid-feedback <?php if ($this->errorsName['name']) echo 'visible'; ?>">Name should be min 2 chars max 16 chars</div>
                     </div>
                     <div class="form-group">
                         <label for="lastNameInput">Last Name</label>
                         <input type="text" class="form-control" id="lastNameInput" name="userLastName" aria-describedby="lastName" placeholder="Enter New Last Name">
-                        <div class="invalid-feedback">Last Name should be min 2 chars max 16 chars</div>
+                        <div class="invalid-feedback <?php if ($this->errorsName['lastname']) echo 'visible'; ?>">Last Name should be min 2 chars max 16 chars</div>
                     </div>
                     <button type="submit" class="btn btn-primary" name="editNameForm">Submit</button>
                 </form>
             </div>
-            <div class="tab-pane" id="profile" role="tabpanel">
-                <form>
+            <div class="tab-pane <?php if ($this->activeTab == 2) echo 'active' ?>" id="pswd" role="tabpanel">
+                <?php if ($this->isPswdChanged): ?>
+                    <div class="invalid-feedback visible">Your password succesfully changed!</div>
+                <?php endif; ?>
+                <form action="/edit-profile" method="post" class="pswd-edit-form">
                     <div class="form-group">
                         <label for="InputPassword1">Old Password</label>
-                        <input type="password" class="form-control" id="InputPassword1" placeholder="Old Password">
+                        <input type="password" class="form-control" name="oldPswd" id="InputPassword1" placeholder="Old Password">
+                        <div class="invalid-feedback <?php if ($this->errorsPswd['old']) echo 'visible'; ?>">Incorrect password</div>
                     </div>
                     <div class="form-group">
                         <label for="InputPassword2">New Password</label>
-                        <input type="password" class="form-control" id="InputPassword2" placeholder="New Password">
+                        <input type="password" class="form-control" name="newPswd" id="InputPassword2" placeholder="New Password">
+                        <div class="invalid-feedback <?php if ($this->errorsPswd['new']) echo 'visible'; ?>">Password should be min 6 chars max 16 chars</div>
                     </div>
-                    <div class="form-group">
-                        <label for="InputPassword3">Confrim New Password</label>
-                        <input type="password" class="form-control" id="InputPassword3" placeholder="Confrim New Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="editPswdForm">Submit</button>
                 </form>
             </div>
-            <div class="tab-pane" id="messages" role="tabpanel">
-                <label class="custom-file">
-                    <input type="file" id="file2" class="custom-file-input">
-                    <span class="custom-file-control"></span>
-                </label>
-            </div>
-            <div class="tab-pane" id="settings" role="tabpanel">
-                <form>
-                    <div class="form-group">
-                        <label for="InputEmail1">Old Email address</label>
-                        <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter Old email">
-                    </div>
-                    <div class="form-group">
-                        <label for="InputEmail2">New Email address</label>
-                        <input type="email" class="form-control" id="InputEmail2" aria-describedby="emailHelp" placeholder="Enter New email">
-                    </div>
+            <div class="tab-pane" id="avatar" role="tabpanel">
+                <form method="post" action="/edit-profile" class="avatar-edit-form" enctype="multipart/form-data">
+                    <label class="custom-file">
+                        <input type="file" id="file2" name="file" class="custom-file-input" required>
+                        <span class="custom-file-control"></span>
+                    </label><br>
+                    <div class="invalid-feedback"><?php if($this->imgMistake) echo $this->imgMistake; ?></div>
+                    <button type="submit" class="btn btn-primary" name="editAvatarForm">Submit</button>
                 </form>
-                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </section>
