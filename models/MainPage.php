@@ -9,16 +9,9 @@ class MainPage{
 
     public function __construct($db){
         $this->db = $db;
-        $this->id = $this->isLogged();
+        $this->id = BaseModel::isLogged();
     }
 
-    public static function isLogged()
-    {
-        if (isset($_SESSION['id'])) {
-            return $_SESSION['id'];
-        }
-        return false;
-    }
 
     public function getUserAvatar(){
         $sql = 'SELECT avatar FROM users'

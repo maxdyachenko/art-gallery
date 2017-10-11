@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data: data,
             success: function (data) {
                 if (data === "No errors") {
-                    window.location.href = '/main';
+                    //window.location.href = '/main';
                 } else{
                     $('.alert-danger').html(data).addClass('visible');
                     $('.sign-in')[0].reset();

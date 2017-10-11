@@ -8,7 +8,7 @@ class MainPageController {
 
     public function __construct(){
         $this->model = new MainPage(Db::getConnection());
-        if (!MainPage::isLogged()) {
+        if (!BaseModel::isLogged()) {
             header('Location: /');
             exit;
         }

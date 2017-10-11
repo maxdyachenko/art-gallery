@@ -10,6 +10,31 @@ class FrontPage{
         $_SESSION['id'] = $id;
     }
 
+    public function setToken($token){
+        $id = $_SESSION['id'];
+        $this->setTokenInCookie($id, $token);
+        $sql = 'UPDATE users SET remember_token = :token '
+            . 'WHERE id = :id';
+
+        $stmt = $this->db->prepare($sql);
+
+        return $stmt->execute(array(':id' => $id, 'token' => $token));
+    }
+
+    public function setTokenInCookie($id, $token){
+        setcookie('id', $id, time()+60*60*24*30, '/');
+        setcookie('token', $token, time()+60*60*24*30, '/');
+    }
+
+    public function hasToken(){
+        $id = $_SESSION['id'];
+        $sql = 'SELECT remember_token FROM users'
+            .' WHERE id = :id';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array(':id' => $id));
+        return $stmt->fetchColumn();
+    }
+
     public function checkCredentials($email, $password) {
 
         $sql = 'SELECT id, password, name FROM users'
@@ -40,6 +65,7 @@ class FrontPage{
         $stmt->execute(array(':email' => $email));
         return $stmt->fetchColumn();
     }
+
 
     public function finalRegister($code)
     {

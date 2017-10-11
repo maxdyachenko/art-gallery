@@ -12,6 +12,10 @@ class FrontPageController
     public $errors = [];
 
     public function __construct(){
+        if (BaseModel::isLogged()) {
+            header('Location: /main');
+            exit;
+        }
         $this->model = new FrontPage(Db::getConnection());
     }
 
@@ -42,6 +46,15 @@ class FrontPageController
                 } else{
                     $error = "Email is not verified";
                 }
+            }
+
+            if ($error == "No errors" && !$this->model->hasToken() && isset($_POST['rememberMe'])){
+                $bytes = random_bytes(20);
+                $token = bin2hex($bytes);
+                $this->model->setToken($token);
+            }
+            else if ($this->model->hasToken() && $error == "No errors" && isset($_POST['rememberMe'])){ //method to remember user on different browsers
+                $this->model->setTokenInCookie($_SESSION['id'], $this->model->hasToken());
             }
         }
         echo $error;

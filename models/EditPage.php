@@ -6,7 +6,7 @@ class EditPage
     public function __construct($db)
     {
         $this->db = $db;
-        $this->id = MainPage::isLogged();
+        $this->id = BaseModel::isLogged();
     }
 
     public function getUserAvatar(){

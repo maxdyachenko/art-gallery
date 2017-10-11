@@ -18,7 +18,7 @@ class EditPageController{
     public function __construct()
     {
         $this->model = new EditPage(Db::getConnection());
-        if (!MainPage::isLogged()) {
+        if (!BaseModel::isLogged()) {
             header('Location: /');
             exit;
         }
