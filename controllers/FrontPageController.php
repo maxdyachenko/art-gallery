@@ -21,8 +21,6 @@ class FrontPageController
 
     public function actionIndex()
     {
-        $this->regFieldsValidate();
-
         require_once(ROOT . '/views/site/index.php');
         return true;
     }
@@ -61,9 +59,9 @@ class FrontPageController
         return true;
     }
 
-    public function regFieldsValidate()
+    public function actionRegisterPrimary()
     {
-        if (isset($_POST['register'])) {
+        if (isset($_POST['regEmail']) && isset($_POST['regPswd']) && isset($_POST['regPswd2']) && isset($_POST['regName']) && isset($_POST['regLastName'])) {
             $this->name = FrontPage::safeInput($_POST['regName']);
             $this->lastName = FrontPage::safeInput($_POST['regLastName']);
             $this->mail = FrontPage::safeInput($_POST['regEmail']);
@@ -71,22 +69,22 @@ class FrontPageController
             $this->pswd2 = FrontPage::safeInput($_POST['regPswd2']);
 
             if (!FrontPage::checkName($this->name)) {
-                $this->errors['name'] = 1;
+                $this->errors['name'] = "Min 2 chars max 16 chars";
             }
             if (!FrontPage::checkName($this->lastName)) {
-                $this->errors['lastName'] = 1;
+                $this->errors['lastName'] = "Min 2 chars max 16 chars";
             }
             if (!FrontPage::checkPswd($this->pswd)) {
-                $this->errors['pswd'] = 1;
+                $this->errors['pswd'] = "Min 6 chars max 16 chars";
             }
             if (!$this->model->checkPswd2($this->pswd, $this->pswd2)) {
-                $this->errors['pswd2'] = 1;
+                $this->errors['pswd2'] = "Passwords do not match";
             }
             if (!$this->model->checkEmail($this->mail)) {
-                $this->errors['mail'] = 1;
+                $this->errors['mail'] = "Invalid email";
             }
             if ($this->model->checkEmailExists($this->mail)) {
-                $this->errors['mail'] = 2; //hack to show another mistake in view file
+                $this->errors['mail'] = "Such email already exists";
             }
 
             if (empty($this->errors)) {
@@ -95,9 +93,12 @@ class FrontPageController
                 $this->sendEmail();
                 $hash = password_hash($this->pswd, PASSWORD_DEFAULT);
                 $this->model->primaryRegister($this->name, $this->lastName, $this->mail, $hash, $this->code);
-                header('Location: /', false, 303);
+            }
+            else {
+                echo json_encode($this->errors);
             }
         }
+        return true;
     }
 
     public function sendEmail()

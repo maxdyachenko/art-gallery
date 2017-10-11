@@ -9,5 +9,6 @@ return array(
     'delete' => 'mainPage/delete',
     'exit' => 'exit/exit',
     'auth' => 'frontPage/auth',
+    'register' => 'frontPage/registerPrimary',
     '' => 'frontPage/index' // actionIndex в FrontPageController
 );

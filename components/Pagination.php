@@ -9,7 +9,7 @@ class Pagination{
 
 
     public function __construct($total, $currentPage, $limit){
-        $this->total = $total;
+        $this->total = $total ? $total : 1;//to avoid break down of module if no content
 
         $this->limit = $limit;
 

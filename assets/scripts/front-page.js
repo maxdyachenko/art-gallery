@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         signupForm.classList.add('active');
     });
 
-    signupForm.addEventListener('submit', validateRegForm);
     signinButton.addEventListener('click', validateAuthForm);
 
     function validateAuthForm() {
@@ -43,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data: data,
             success: function (data) {
                 if (data === "No errors") {
-                    //window.location.href = '/main';
+                    window.location.href = '/main';
                 } else{
                     $('.alert-danger').html(data).addClass('visible');
                     $('.sign-in')[0].reset();
@@ -52,21 +51,79 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     }
 
+    var errorsCount = 0;
+    registerButton.addEventListener('click', validateRegForm);
     function validateRegForm() {
+        errorsCount =  0;
         !isCorrectEmail(regEmail)? addMistakeClass(regEmail): removeMistakeClass(regEmail);
         !isCorrectPswd() ? addMistakeClass(regPswd): removeMistakeClass(regPswd);
         !isConfirmedPswd() ? addMistakeClass(regPswd2): removeMistakeClass(regPswd2);
         !isCorrectName(regName) ? addMistakeClass(regName): removeMistakeClass(regName);
         !isCorrectName(regLastName) ? addMistakeClass(regLastName): removeMistakeClass(regLastName);
+
+        if (errorsCount === -5){
+            sendRegister();
+        }
+    }
+
+    function sendRegister() {
+        var data = $('.sign-up').serialize();
+        var response;
+        $.ajax({
+            type: "POST",
+            url: "/register",
+            data: data,
+            success: function (data) {
+                if (data && Object.keys(JSON.parse(data)).length > 0)
+                    outputErrors(JSON.parse(data));
+                else{
+                    //change form
+                    signinForm.classList.remove('disable');
+                    signupForm.classList.remove('active');
+                    $('.sign-up')[0].reset();
+                    $('.alert-danger').html("Please verify your email and auth").addClass('visible');
+                }
+            }
+        });
+    }
+
+    function outputErrors(errors) {
+        for (var property in errors) {
+            if (errors.hasOwnProperty(property)) {
+                switch (property){
+                    case 'mail':
+                        regEmail.nextElementSibling.innerHTML = errors[property];
+                        regEmail.nextElementSibling.classList.add('visible');
+                        break;
+                    case 'name':
+                        regName.nextElementSibling.innerHTML = errors[property];
+                        regEmail.nextElementSibling.classList.add('visible');
+                        break;
+                    case 'lastName':
+                        regLastNameName.nextElementSibling.innerHTML = errors[property];
+                        regEmail.nextElementSibling.classList.add('visible');
+                        break;
+                    case 'pswd':
+                        regPswd.nextElementSibling.innerHTML = errors[property];
+                        regEmail.nextElementSibling.classList.add('visible');
+                        break;
+                    case 'pswd2':
+                        regPswd2.nextElementSibling.innerHTML = errors[property];
+                        regEmail.nextElementSibling.classList.add('visible');
+                        break;
+                }
+            }
+        }
     }
 
     function addMistakeClass(element) {
         element.nextElementSibling.classList.add('visible');
-        event.preventDefault();
+        errorsCount++;
     }
 
     function removeMistakeClass(element) {
         element.nextElementSibling.classList.remove('visible');
+        errorsCount--;
     }
 
     function isCorrectPswd() {
