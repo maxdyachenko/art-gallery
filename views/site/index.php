@@ -4,7 +4,63 @@
 </div>
 <div class="container-fluid">
     <div class="row justify-content-between">
-        <div class="col-md-3">
+        <div class="col-md-3 images-wrapper">
+            <div class="images-container">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                    </div>
+                </div>
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                    </div>
+                </div>
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                    </div>
+                </div>
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                    </div>
+                </div>
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                    </div>
+                </div>
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                    </div>
+                </div>
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                    </div>
+                </div>
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                    </div>
+                </div>
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <div class="col-md-3 front-box">
