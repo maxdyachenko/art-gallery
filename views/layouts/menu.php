@@ -12,6 +12,9 @@
             <li class="nav-item <?php if ($this->current == 'Edit profile') echo 'active'; ?>">
                 <a class="nav-link" href="/edit-profile">Edit profile</a>
             </li>
+            <li class="nav-item <?php if ($this->current == 'Gallery list') echo 'active'; ?>">
+                <a class="nav-link" href="/gallery-list">Gallery list</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/exit">Exit</a>
             </li>

@@ -353,6 +353,29 @@ body{
 	margin-top: 25px;
 }
 
+/*Gallery list styles*/
+.card-custom{
+	margin-top: 20px;
+	flex-direction: row;
+	border: none;
+}
+.card-custom img{
+	width: 100px;
+	height: 100px;
+	margin-right: 20px;
+}
+.card-custom .card-block{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+/*Create gallery page*/
+#galleryName {
+	margin: 20px 0;
+}
+
+
 
 /* footer styles */
 footer{
