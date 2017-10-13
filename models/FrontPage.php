@@ -26,12 +26,11 @@ class FrontPage{
         setcookie('token', $token, time()+60*60*24*30, '/');
     }
 
-    public function hasToken(){
-        $id = $_SESSION['id'];
+    public function hasToken($email){
         $sql = 'SELECT remember_token FROM users'
-            .' WHERE id = :id';
+            .' WHERE email = :email';
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(array(':id' => $id));
+        $stmt->execute(array(':email' => $email));
         return $stmt->fetchColumn();
     }
 
@@ -56,6 +55,16 @@ class FrontPage{
         $_SESSION['username'] = $name;
     }
 
+    public function saveUserInfo($name, $mail){
+        $_SESSION['name'] = $name;
+        $_SESSION['mail'] = $mail;
+        $_SESSION['resends'] = 3; //count of resends to confirm email addres
+    }
+
+    public function resetUserInfo(){
+        unset($_SESSION['name'], $_SESSION['mail'], $_SESSION['resends']);
+    }
+
     public function isVerified($email) {
         $this->db = Db::getConnection();
 
@@ -78,14 +87,14 @@ class FrontPage{
         return $stmt->execute();
     }
 
-    public function primaryRegister($name, $lastName, $email, $password, $code)
+    public function primaryRegister($name, $lastName, $email, $password)
     {
-        $sql = 'INSERT INTO users (name,lastName,email,password,code) '
-            . 'VALUES (:name,:lastname,:email,:password,:code)';
+        $sql = 'INSERT INTO users (name,lastName,email,password) '
+            . 'VALUES (:name,:lastname,:email,:password)';
 
         $result = $this->db->prepare($sql);
 
-        $result->execute(array(':name' => $name, ':lastname' => $lastName, ':email' => $email, ':password' => $password, ':code' => $code));
+        $result->execute(array(':name' => $name, ':lastname' => $lastName, ':email' => $email, ':password' => $password));
     }
 
     public function checkEmailLink($name, $code) {

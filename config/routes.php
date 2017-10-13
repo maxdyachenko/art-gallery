@@ -8,6 +8,7 @@ return array(
     'main' => 'mainPage/content',
     'delete' => 'mainPage/delete',
     'exit' => 'exit/exit',
+    'activate-email' => 'activatePage/activateEmail',
     'auth' => 'frontPage/auth',
     'register' => 'frontPage/registerPrimary',
     '' => 'frontPage/index' // actionIndex в FrontPageController

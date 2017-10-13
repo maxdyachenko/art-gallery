@@ -77,11 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data && Object.keys(JSON.parse(data)).length > 0)
                     outputErrors(JSON.parse(data));
                 else{
-                    //change form
-                    signinForm.classList.remove('disable');
-                    signupForm.classList.remove('active');
-                    $('.sign-up')[0].reset();
-                    $('.alert-danger').html("Please verify your email and auth").addClass('visible');
+                    window.location.href = '/activate-email';
                 }
             }
         });

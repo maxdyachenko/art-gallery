@@ -46,13 +46,13 @@ class FrontPageController
                 }
             }
 
-            if ($error == "No errors" && !$this->model->hasToken() && isset($_POST['rememberMe'])){
+            if ($error == "No errors" && !$this->model->hasToken($email) && isset($_POST['rememberMe'])){
                 $bytes = random_bytes(20);
                 $token = bin2hex($bytes);
                 $this->model->setToken($token);
             }
-            else if ($this->model->hasToken() && $error == "No errors" && isset($_POST['rememberMe'])){ //method to remember user on different browsers
-                $this->model->setTokenInCookie($_SESSION['id'], $this->model->hasToken());
+            else if ($this->model->hasToken($email) && $error == "No errors" && isset($_POST['rememberMe'])){ //method to remember user on different browsers
+                $this->model->setTokenInCookie($_SESSION['id'], $this->model->hasToken($email));
             }
         }
         echo $error;
@@ -88,11 +88,13 @@ class FrontPageController
             }
 
             if (empty($this->errors)) {
+                $this->model->saveUserInfo($this->name, $this->mail);
                 $bytes = random_bytes(10);
                 $this->code = bin2hex($bytes);
-                $this->sendEmail();
+                BaseModel::sendEmail($this->mail, $this->name, $this->code);
                 $hash = password_hash($this->pswd, PASSWORD_DEFAULT);
-                $this->model->primaryRegister($this->name, $this->lastName, $this->mail, $hash, $this->code);
+                $this->model->primaryRegister($this->name, $this->lastName, $this->mail, $hash);
+                BaseModel::saveCode($this->code);
             }
             else {
                 echo json_encode($this->errors);
@@ -101,25 +103,6 @@ class FrontPageController
         return true;
     }
 
-    public function sendEmail()
-    {
-        $to = $this->mail;
-        $subject = "Hi, {$this->name} ! Please, confirm you email on Art Gallery";
-        $message = '
-                <html>
-                    <head>
-                        <title>' . $subject . '</title>
-                    </head>
-                    <body>
-                        <p>Your name: ' . $this->name . '</p>
-                        <p>Password ' . $this->pswd . '</p> 
-                        <p>-------------------------</p>
-                        <p>Please, click this link to verify your email: http://online-shopping.esy.es/verify-email?username=' . $this->name . '&code=' . $this->code . '</p>                
-                    </body>
-                </html>';
-        $headers = "Content-type: text/html; charset=utf-8 \r\n" . "From: Art Gallery <from@art-gallery.com>\r\n";
-        mail($to, $subject, $message, $headers);
-    }
 
 
     public function actionRegister()
@@ -129,6 +112,7 @@ class FrontPageController
 
         if (!$this->model->checkEmailLink($username, $code)) {
             $this->model->finalRegister($code);
+            $this->model->resetUserInfo();
             require_once(ROOT . '/views/layouts/email-confirmed.php');
             header("refresh:5; url=/");
         } else {
