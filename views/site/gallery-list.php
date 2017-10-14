@@ -8,7 +8,7 @@
                 <img class="card-img-top" src="<?php echo '/assets/img/gallerys/' . $_SESSION['id'] . '/' . $value['name'] . '/gallery-avatar.jpg' ?>" alt="Card image cap">
                 <div class="card-block">
                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
-                    <a href="#" class="btn btn-primary">Open Gallery</a>
+                    <a href="/gallery/<?php echo $value['name'] ?>" class="btn btn-primary">Open Gallery</a>
                 </div>
             </div>
         <?php endforeach; ?>

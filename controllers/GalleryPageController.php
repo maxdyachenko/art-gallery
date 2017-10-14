@@ -2,15 +2,8 @@
 
 class GalleryPageController
 {
-    public $current = "Gallery list";
-
-    public function actionIndex(){
-
-        require_once(ROOT . '/views/site/gallery.php');
+    public function actionIndex($gallery, $page = 1){
         return true;
     }
 
-    public function getContent(){
-        return GalleryPage::getContent();
-    }
 }
