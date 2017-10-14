@@ -1,42 +1,42 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Max
+ * Date: 14.10.2017
+ * Time: 13:20
+ */
 
 class GalleryPage
 {
-    public static function getContent() {
-        $db = Db::getConnection();
-        $sql = 'SELECT name, avatar'
-            . ' FROM gallerys_list'
-            . ' WHERE user_id = :id';
-        $stmt = $db->prepare($sql);
-        $stmt->execute(array(':id' => $_SESSION['id']));
-        return $stmt->fetchAll();
-    }
+    const ITEMS_ON_PAGE = 5;
 
-    public static function hasLimit(){
+    public static function getAllContent($gallery)
+    {
         $db = Db::getConnection();
-        $sql = 'SELECT COUNT(*)'
-            . ' FROM gallerys_list'
-            . ' WHERE user_id = :id';
+        $sql = 'SELECT count(user_img) FROM  users_imgs'
+            . ' WHERE user_id = :user_id AND gallery_name = :gallery';
         $stmt = $db->prepare($sql);
-        $stmt->execute(array(':id' => $_SESSION['id']));
+        $stmt->execute(array(':user_id' => $_SESSION['id'], 'gallery' => $gallery));
+
         return $stmt->fetchColumn();
     }
 
-    public static function checkGalleryName($name){
+    public static function getUserContent($page, $gallery)
+    {
         $db = Db::getConnection();
-        $sql = 'SELECT id'
-            . ' FROM gallerys_list'
-            . ' WHERE user_id = :id AND name = :name';
+        $count = self::ITEMS_ON_PAGE;
+
+        $ofset = ($page - 1) * $count;
+
+        $sql = 'SELECT user_img FROM  users_imgs'
+            . ' WHERE user_id = :user_id AND gallery_name = :gallery'
+            . ' ORDER BY id DESC'
+            . ' LIMIT '. $count
+            . ' OFFSET '. $ofset;
         $stmt = $db->prepare($sql);
-        $stmt->execute(array(':id' => $_SESSION['id'], 'name' => $name));
-        return $stmt->fetchColumn();
+        $stmt->execute(array(':user_id' => $_SESSION['id'], 'gallery' => $gallery));
+
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    public static function uploadGallery($image, $name){
-        $db = Db::getConnection();
-        $sql = 'INSERT INTO gallerys_list (name, avatar, user_id)'
-            .' VALUES (:name, :image, :id)';
-        $stmt = $db->prepare($sql);
-        $stmt->execute(array(':id' => $_SESSION['id'], ':image' => $image, 'name' => $name));
-    }
 }

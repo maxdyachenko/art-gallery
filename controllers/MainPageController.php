@@ -27,7 +27,7 @@ class MainPageController {
         if ($page > $pagination->amount)
             header('Location: /main/1');
 
-        require_once(ROOT . '/views/site/news.php');
+        require_once(ROOT . '/views/site/gallery.php');
 
         return true;
     }

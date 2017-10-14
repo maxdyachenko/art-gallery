@@ -9,14 +9,14 @@ class CreateGalleryPageController
     }
 
     public function actionCreateGallery(){
-        if (GalleryPage::hasLimit() > 4){
+        if (GalleryListPage::hasLimit() > 4){
             $this->errors['limit'] = "You cant create more than 5 galleries";
             print_r(json_encode($this->errors));
             exit;
         }
         if (isset($_POST['name'])){
             $name = FrontPage::safeInput($_POST['name']);
-            if (GalleryPage::checkGalleryName($name)){
+            if (GalleryListPage::checkGalleryName($name)){
                 $this->errors['name'] = "Gallery with such name already exists";
             }
             else if (empty($name)){
@@ -30,7 +30,7 @@ class CreateGalleryPageController
                     $temp = explode(".", $_FILES['file']['name']);
                     $newfilename = 'gallery-avatar.' . end($temp);
                     move_uploaded_file($_FILES['file']['tmp_name'], $dirName . $newfilename);
-                    GalleryPage::uploadGallery($_FILES['file']['name'], $name);
+                    GalleryListPage::uploadGallery($_FILES['file']['name'], $name);
                 }
             }
         }

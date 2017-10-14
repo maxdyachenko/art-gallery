@@ -11,6 +11,6 @@ class GalleryListPageController
     }
 
     public function getContent(){
-        return GalleryPage::getContent();
+        return GalleryListPage::getContent();
     }
 }
