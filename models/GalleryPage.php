@@ -28,7 +28,8 @@ class GalleryPage
             . ' FROM gallerys_list'
             . ' WHERE user_id = :id AND name = :name';
         $stmt = $db->prepare($sql);
-        return $stmt->execute(array(':id' => $_SESSION['id'], 'name' => $name));
+        $stmt->execute(array(':id' => $_SESSION['id'], 'name' => $name));
+        return $stmt->fetchColumn();
     }
 
     public static function uploadGallery($image, $name){

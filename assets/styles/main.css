@@ -371,8 +371,8 @@ body{
 }
 
 /*Create gallery page*/
-#galleryName {
-	margin: 20px 0;
+#galleryName, #create-gallery-btn {
+	margin-top: 20px;
 }
 
 

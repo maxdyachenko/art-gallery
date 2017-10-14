@@ -9,32 +9,32 @@ class CreateGalleryPageController
     }
 
     public function actionCreateGallery(){
-        if (GalleryPage::hasLimit() < 6){
+        if (GalleryPage::hasLimit() > 4){
             $this->errors['limit'] = "You cant create more than 5 galleries";
-            header('Location: /create-gallery');
+            print_r(json_encode($this->errors));
+            exit;
         }
-        if (isset($_POST['submit'])){
-            $name = FrontPage::safeInput($_POST['galleryName']);
+        if (isset($_POST['name'])){
+            $name = FrontPage::safeInput($_POST['name']);
             if (GalleryPage::checkGalleryName($name)){
                 $this->errors['name'] = "Gallery with such name already exists";
-                header('Location: /create-gallery');
             }
             else if (empty($name)){
                 $this->errors['name'] = "Invalid name";
-                header('Location: /create-gallery');
             }
-            $dirName = "{$_SERVER['DOCUMENT_ROOT']}/assets/img/gallerys/{$_SESSION['id']}/{$name}/";
-            !file_exists($dirName) ? mkdir($dirName, 0777, true) : false;
-            $this->errors['img'] = MainPage::getImageMistake();
-            if (!$this->errors['img']) {
-                $temp = explode(".", $_FILES['file']['name']);
-                $newfilename = 'gallery-avatar.' . end($temp);
-                move_uploaded_file($_FILES['file']['tmp_name'], $dirName . $newfilename);
-                GalleryPage::uploadGallery($_FILES['file']['name'], $name);
-                header('Location: /gallery-list');
+            else {
+                $dirName = "{$_SERVER['DOCUMENT_ROOT']}/assets/img/gallerys/{$_SESSION['id']}/{$name}/";
+                !file_exists($dirName) ? mkdir($dirName, 0777, true) : false;
+                MainPage::getImageMistake() ? $this->errors['img'] : false;
+                if (!isset($this->errors['img'])) {
+                    $temp = explode(".", $_FILES['file']['name']);
+                    $newfilename = 'gallery-avatar.' . end($temp);
+                    move_uploaded_file($_FILES['file']['tmp_name'], $dirName . $newfilename);
+                    GalleryPage::uploadGallery($_FILES['file']['name'], $name);
+                }
             }
         }
-        header('Location: /create-gallery');
+        print_r(json_encode($this->errors));
         return true;
     }
 
