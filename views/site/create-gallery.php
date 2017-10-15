@@ -18,7 +18,7 @@
     </section>
 </div>
 
-<script src="/assets/scripts/gallery-page.js"></script>
+<script src="/assets/scripts/gallery-page-create.js"></script>
 </body>
 <?php include ROOT . '/views/layouts/footer.php' ?>
 </html>

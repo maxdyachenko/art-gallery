@@ -21,6 +21,7 @@
             <div class="modal-footer">
                 <form action="/delete" method="post">
                     <input type="hidden" name="name">
+                    <input type="hidden" name="gallery" value="<?php echo $this->gallery ?>">
                     <button type="submit" class="btn btn-primary delete-btn">Confirm</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </form>
@@ -37,6 +38,6 @@
 </div>
 
 <?php include ROOT . '/views/layouts/footer.php' ?>
-<script src="/assets/scripts/news-page.js"></script>
+<script src="/assets/scripts/gallery-page.js"></script>
 </body>
 </html>

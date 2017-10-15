@@ -3,6 +3,17 @@
 class CreateGalleryPageController
 {
     public $errors = [];
+
+    public function __construct()
+    {
+
+        if (!BaseModel::isLogged()) {
+            header('Location: /');
+            exit;
+        }
+        $this->userAvatar = GalleryPage::getUserAvatar();
+    }
+
     public function actionIndex(){
         require_once(ROOT . '/views/site/create-gallery.php');
         return true;
@@ -25,7 +36,7 @@ class CreateGalleryPageController
             else {
                 $dirName = "{$_SERVER['DOCUMENT_ROOT']}/assets/img/gallerys/{$_SESSION['id']}/{$name}/";
                 !file_exists($dirName) ? mkdir($dirName, 0777, true) : false;
-                MainPage::getImageMistake() ? $this->errors['img'] : false;
+                GalleryPage::getImageMistake() ? $this->errors['img'] : false;
                 if (!isset($this->errors['img'])) {
                     $temp = explode(".", $_FILES['file']['name']);
                     $newfilename = 'gallery-avatar.' . end($temp);

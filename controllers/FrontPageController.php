@@ -13,7 +13,7 @@ class FrontPageController
 
     public function __construct(){
         if (BaseModel::isLogged()) {
-            header('Location: /main');
+            header('Location: /gallery-list');
             exit;
         }
         $this->model = new FrontPage(Db::getConnection());

@@ -83,7 +83,7 @@ class EditPageController{
             if (file_exists($dirName . $newfilename)){
                 unlink($dirName . $newfilename);
             }
-            $this->imgMistake = MainPage::getImageMistake();
+            $this->imgMistake = GalleryPage::getImageMistake();
             if (!$this->imgMistake) {
                 move_uploaded_file($_FILES['file']['tmp_name'], $dirName . $newfilename);
                 $this->model->uploadImage($newfilename);

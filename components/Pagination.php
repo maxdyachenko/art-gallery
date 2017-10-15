@@ -6,12 +6,15 @@ class Pagination{
     public $limit;
     public $amount;
     public $currentPage;
+    public $gallery;
 
 
-    public function __construct($total, $currentPage, $limit){
+    public function __construct($total, $currentPage, $limit, $galleryName){
         $this->total = $total ? $total : 1;//to avoid break down of module if no content
 
         $this->limit = $limit;
+
+        $this->gallery = $galleryName;
 
         $this->amount = $this->getAmountOfPages();
 
@@ -43,7 +46,7 @@ class Pagination{
     public function generateLink($index){
         $currentURI = rtrim($_SERVER['REQUEST_URI'], '/') . '/';
         $currentURI = preg_replace('~/[0-9]+~', '', $currentURI);
-        return $currentURI . $index;
+        return $currentURI . $this->gallery. '/' . $index;
     }
 
     public function setCurrentPage($currentPage) {

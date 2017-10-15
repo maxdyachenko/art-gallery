@@ -4,65 +4,65 @@
 </div>
 <div class="container-fluid">
     <div class="row justify-content-between">
-        <div class="col-md-3 images-wrapper">
-            <div class="images-container">
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                    </div>
-                </div>
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                    </div>
-                </div>
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                    </div>
-                </div>
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                    </div>
-                </div>
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                    </div>
-                </div>
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                    </div>
-                </div>
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                    </div>
-                </div>
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                    </div>
-                </div>
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+<!--        <div class="col-md-3 images-wrapper">-->
+<!--            <div class="images-container">-->
+<!--                <div class="flip-container">-->
+<!--                    <div class="flipper">-->
+<!--                        <div class="front"></div>-->
+<!--                        <div class="back"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flip-container">-->
+<!--                    <div class="flipper">-->
+<!--                        <div class="front"></div>-->
+<!--                        <div class="back"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flip-container">-->
+<!--                    <div class="flipper">-->
+<!--                        <div class="front"></div>-->
+<!--                        <div class="back"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flip-container">-->
+<!--                    <div class="flipper">-->
+<!--                        <div class="front"></div>-->
+<!--                        <div class="back"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flip-container">-->
+<!--                    <div class="flipper">-->
+<!--                        <div class="front"></div>-->
+<!--                        <div class="back"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flip-container">-->
+<!--                    <div class="flipper">-->
+<!--                        <div class="front"></div>-->
+<!--                        <div class="back"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flip-container">-->
+<!--                    <div class="flipper">-->
+<!--                        <div class="front"></div>-->
+<!--                        <div class="back"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flip-container">-->
+<!--                    <div class="flipper">-->
+<!--                        <div class="front"></div>-->
+<!--                        <div class="back"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flip-container">-->
+<!--                    <div class="flipper">-->
+<!--                        <div class="front"></div>-->
+<!--                        <div class="back"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--        </div>-->
         <div class="col-md-3 front-box">
             <form action="/auth" class="sign-in <?php if (isset($this->errors) && !empty($this->errors)) echo 'disable' ?>" method="post">
                 <div class="form-group">
@@ -84,7 +84,7 @@
                 </div>
                 <div class="buttons-container">
                     <button type="button" class="btn btn-primary" name="auth" id="signin-button">Sign in</button>
-                    <button type="button" class="btn btn-primary" id="signup-button">Sign up</button>
+                    <button type="button" class="btn btn-primary" id="signup-button">Register</button>
                 </div>
             </form>
             <form class="sign-up" method="post">
