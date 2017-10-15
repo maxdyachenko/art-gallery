@@ -2,6 +2,8 @@
 
 class BaseModel
 {
+    const ITEMS_ON_PAGE = 5;
+
     public static function isLogged() {
         if (isset($_SESSION['id'])) {
             return $_SESSION['id'];
@@ -56,5 +58,29 @@ class BaseModel
         setcookie("id", "", time()-3600);
         setcookie("token", "", time()-3600);
     }
+
+    public static function getImageMistake() {
+        $imgMistake = '';
+        if (!getimagesize($_FILES['file']['tmp_name'])){
+            $imgMistake = "Please upload an image";
+        }
+        else if (!preg_match('/^.*\.(jpg|JPG|png|PNG)$/',$_FILES['file']['name'])){
+            $imgMistake = "Upload only PNG or JPG";
+        }
+        else if ($_FILES['file']['size'] > 2000000){
+            $imgMistake = "Image size should be less than 2Mb";
+        }
+        return $imgMistake;
+    }
+
+    public static function getUserAvatar(){
+        $db = Db::getConnection();
+        $sql = 'SELECT avatar FROM users'
+            .' WHERE id = :id';
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array(':id' => $_SESSION['id']));
+        return $stmt->fetchColumn();
+    }
+
 
 }

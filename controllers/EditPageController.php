@@ -22,7 +22,7 @@ class EditPageController{
             header('Location: /');
             exit;
         }
-        $this->userAvatar = $this->model->getUserAvatar();
+        $this->userAvatar = BaseModel::getUserAvatar();
     }
 
     public function actionEdit() {
@@ -75,7 +75,7 @@ class EditPageController{
     }
 
     public function editAvatar(){
-        $dirName = "{$_SERVER['DOCUMENT_ROOT']}/assets/img/{$_SESSION['id']}/";
+        $dirName = "{$_SERVER['DOCUMENT_ROOT']}/assets/img/gallerys/{$_SESSION['id']}/";
         !file_exists($dirName) ? mkdir($dirName, 0755) : false;
         if (isset($_POST['editAvatarForm'])){
             $temp = explode(".", $_FILES['file']['name']);
@@ -83,7 +83,7 @@ class EditPageController{
             if (file_exists($dirName . $newfilename)){
                 unlink($dirName . $newfilename);
             }
-            $this->imgMistake = GalleryPage::getImageMistake();
+            $this->imgMistake = BaseModel::getImageMistake();
             if (!$this->imgMistake) {
                 move_uploaded_file($_FILES['file']['tmp_name'], $dirName . $newfilename);
                 $this->model->uploadImage($newfilename);

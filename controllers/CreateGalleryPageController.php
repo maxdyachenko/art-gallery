@@ -11,7 +11,8 @@ class CreateGalleryPageController
             header('Location: /');
             exit;
         }
-        $this->userAvatar = GalleryPage::getUserAvatar();
+        $this->userAvatar = BaseModel::getUserAvatar();
+        $this->model = new GalleryListPage(Db::getConnection());
     }
 
     public function actionIndex(){
@@ -20,14 +21,14 @@ class CreateGalleryPageController
     }
 
     public function actionCreateGallery(){
-        if (GalleryListPage::hasLimit() > 4){
+        if ($this->model->hasLimit() > 4){
             $this->errors['limit'] = "You cant create more than 5 galleries";
             print_r(json_encode($this->errors));
             exit;
         }
         if (isset($_POST['name'])){
             $name = FrontPage::safeInput($_POST['name']);
-            if (GalleryListPage::checkGalleryName($name)){
+            if ($this->model->checkGalleryName($name)){
                 $this->errors['name'] = "Gallery with such name already exists";
             }
             else if (empty($name)){
@@ -36,12 +37,12 @@ class CreateGalleryPageController
             else {
                 $dirName = "{$_SERVER['DOCUMENT_ROOT']}/assets/img/gallerys/{$_SESSION['id']}/{$name}/";
                 !file_exists($dirName) ? mkdir($dirName, 0777, true) : false;
-                GalleryPage::getImageMistake() ? $this->errors['img'] : false;
+                BaseModel::getImageMistake() ? $this->errors['img'] : false;
                 if (!isset($this->errors['img'])) {
                     $temp = explode(".", $_FILES['file']['name']);
                     $newfilename = 'gallery-avatar.' . end($temp);
                     move_uploaded_file($_FILES['file']['tmp_name'], $dirName . $newfilename);
-                    GalleryListPage::uploadGallery($_FILES['file']['name'], $name);
+                    $this->model->uploadGallery($_FILES['file']['name'], $name);
                 }
             }
         }

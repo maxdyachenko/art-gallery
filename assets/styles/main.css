@@ -274,7 +274,9 @@ body{
 	width: 100%;
 	padding-top: 20px
 }
-
+.buttons-group {
+	margin-bottom: 20px;
+}
 .custom-popover button {
 	cursor: pointer;
 }

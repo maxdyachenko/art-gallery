@@ -9,8 +9,9 @@ class GalleryListPageController
             header('Location: /');
             exit;
         }
+        $this->model = new GalleryListPage(Db::getConnection());
 
-        $this->userAvatar = GalleryPage::getUserAvatar();
+        $this->userAvatar = BaseModel::getUserAvatar();
     }
 
     public function actionIndex(){
@@ -20,6 +21,6 @@ class GalleryListPageController
     }
 
     public function getContent(){
-        return GalleryListPage::getContent();
+        return $this->model->getContent();
     }
 }

@@ -4,6 +4,11 @@
 
 <div class="content">
     <section class="container news-container content-container">
+        <div class="row justify-content-between buttons-group">
+            <button type="button" class="btn btn-danger delete-all" data-toggle="modal" data-target="#delete-image-popup" data-name="<?php echo $this->gallery ?>">Delete All</button>
+<!--            delete-all -> this class to handle this button in js and set coorect action in form popup-->
+            <a class="btn btn-danger">Delete selected</a>
+        </div>
         <div class="row justify-content-between images-wrapper">
             <?php $this->updateContent(); ?>
         </div>
@@ -16,10 +21,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <p>Delete the image?</p>
+                <p>Are you sure?</p>
             </div>
             <div class="modal-footer">
-                <form action="/delete" method="post">
+                <form method="post">
                     <input type="hidden" name="name">
                     <input type="hidden" name="gallery" value="<?php echo $this->gallery ?>">
                     <button type="submit" class="btn btn-primary delete-btn">Confirm</button>

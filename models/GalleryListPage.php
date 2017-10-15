@@ -2,41 +2,42 @@
 
 class GalleryListPage
 {
-    public static function getContent() {
-        $db = Db::getConnection();
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
+    public function getContent() {
         $sql = 'SELECT name, avatar'
             . ' FROM gallerys_list'
             . ' WHERE user_id = :id';
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute(array(':id' => $_SESSION['id']));
         return $stmt->fetchAll();
     }
 
-    public static function hasLimit(){
-        $db = Db::getConnection();
+    public function hasLimit(){
         $sql = 'SELECT COUNT(*)'
             . ' FROM gallerys_list'
             . ' WHERE user_id = :id';
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute(array(':id' => $_SESSION['id']));
         return $stmt->fetchColumn();
     }
 
-    public static function checkGalleryName($name){
-        $db = Db::getConnection();
+    public function checkGalleryName($name){
         $sql = 'SELECT id'
             . ' FROM gallerys_list'
             . ' WHERE user_id = :id AND name = :name';
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute(array(':id' => $_SESSION['id'], 'name' => $name));
         return $stmt->fetchColumn();
     }
 
-    public static function uploadGallery($image, $name){
-        $db = Db::getConnection();
+    public function uploadGallery($image, $name){
         $sql = 'INSERT INTO gallerys_list (name, avatar, user_id)'
             .' VALUES (:name, :image, :id)';
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute(array(':id' => $_SESSION['id'], ':image' => $image, 'name' => $name));
     }
 }

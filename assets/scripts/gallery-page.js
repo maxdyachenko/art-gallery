@@ -56,9 +56,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     $('#delete-image-popup').on('shown.bs.modal', function (e) {
-        var imgName = e.relatedTarget.getAttribute('data-name');
-        var input = this.getElementsByTagName('input')[0];
-        input.setAttribute('value',imgName);
+        var imgName, input, gallery,
+            form = this.getElementsByTagName('form')[0];
+        if (e.relatedTarget.classList.contains('delete-all')) {
+            gallery = e.relatedTarget.getAttribute('data-name');
+            form.setAttribute('action', '/remove-all-images/' + gallery);
+        }
+        else {
+            imgName = e.relatedTarget.getAttribute('data-name');
+            input = this.getElementsByTagName('input')[0];
+            input.setAttribute('value',imgName);
+            form.setAttribute('action', '/delete');
+        }
     });
 
 
