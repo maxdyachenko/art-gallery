@@ -106,22 +106,6 @@ class FrontPage{
         return $stmt->fetchColumn();
     }
 
-    public static function checkName($name)
-    {
-        if (strlen($name) >= 2 && strlen($name) <= 16) {
-            return true;
-        }
-        return false;
-    }
-
-
-    public static function checkPswd($pswd)
-    {
-        if (strlen($pswd) >= 6 && strlen($pswd) <= 16) {
-            return true;
-        }
-        return false;
-    }
 
     public function checkPswd2($pswd, $pswd2)
     {

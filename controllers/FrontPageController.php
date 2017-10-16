@@ -32,7 +32,7 @@ class FrontPageController
             $pswd = BaseModel::safeInput($_POST['authPswd']);
 
 
-            if (!$this->model->checkEmail($email) || !$this->model->checkEmailExists($email) || !$this->model->checkPswd($pswd)) {
+            if (!$this->model->checkEmail($email) || !$this->model->checkEmailExists($email) || !FrontPage::checkPswd($pswd)) {
                 $error = "Password or email is incorrect";
             } else {
                 $userId = $this->model->checkCredentials($email, $pswd);

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'verify-email\?username=([a-z0-9_-]{2,17})&code=([a-z0-9_-]+)' => 'frontPage/register',
+    'verify-email\?username=([a-zA-Z0-9_-]{2,17})&code=([a-z0-9_-]+)' => 'frontPage/register',
 
     'edit-profile' => 'editPage/edit',
 

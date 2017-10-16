@@ -98,6 +98,22 @@ class BaseModel
         $stmt->execute(array('id' => $_SESSION['id'],':gallery' => $gallery));
     }
 
+    public static function checkName($name)
+    {
+        if (strlen($name) >= 2 && strlen($name) <= 16) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function checkPswd($pswd)
+    {
+        if (strlen($pswd) >= 6 && strlen($pswd) <= 16) {
+            return true;
+        }
+        return false;
+    }
+
 
 
 }
