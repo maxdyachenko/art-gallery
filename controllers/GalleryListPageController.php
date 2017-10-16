@@ -23,4 +23,23 @@ class GalleryListPageController
     public function getContent(){
         return $this->model->getContent();
     }
+
+    public function actionDeleteGallery(){
+        if (isset($_POST['name'])) {
+            $gallery = BaseModel::safeInput($_POST['name']);
+
+            BaseModel::deleteAllImages($gallery);
+            $this->model->deleteGallery($gallery);
+
+            $files = glob("{$_SERVER['DOCUMENT_ROOT']}/assets/img/gallerys/{$_SESSION['id']}/{$gallery}/*");
+            foreach($files as $file){
+                if(is_file($file)){
+                    unlink($file);
+                }
+            }
+
+        }
+        header('Location: /gallery-list');
+        return true;
+    }
 }

@@ -82,5 +82,22 @@ class BaseModel
         return $stmt->fetchColumn();
     }
 
+    public static function safeInput($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    public static function deleteAllImages($gallery){
+        $db = Db::getConnection();
+        $sql = 'DELETE FROM users_imgs'
+            . ' WHERE user_id = :id AND gallery_name = :gallery';
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array('id' => $_SESSION['id'],':gallery' => $gallery));
+    }
+
+
 
 }

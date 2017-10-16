@@ -28,8 +28,8 @@ class FrontPageController
     public function actionAuth() {
         $error = null;
         if (isset($_POST['authEmail']) && isset($_POST['authPswd'])) {
-            $email = FrontPage::safeInput($_POST['authEmail']);
-            $pswd = FrontPage::safeInput($_POST['authPswd']);
+            $email = BaseModel::safeInput($_POST['authEmail']);
+            $pswd = BaseModel::safeInput($_POST['authPswd']);
 
 
             if (!$this->model->checkEmail($email) || !$this->model->checkEmailExists($email) || !$this->model->checkPswd($pswd)) {
@@ -62,19 +62,19 @@ class FrontPageController
     public function actionRegisterPrimary()
     {
         if (isset($_POST['regEmail']) && isset($_POST['regPswd']) && isset($_POST['regPswd2']) && isset($_POST['regName']) && isset($_POST['regLastName'])) {
-            $this->name = FrontPage::safeInput($_POST['regName']);
-            $this->lastName = FrontPage::safeInput($_POST['regLastName']);
-            $this->mail = FrontPage::safeInput($_POST['regEmail']);
-            $this->pswd = FrontPage::safeInput($_POST['regPswd']);
-            $this->pswd2 = FrontPage::safeInput($_POST['regPswd2']);
+            $this->name = BaseModel::safeInput($_POST['regName']);
+            $this->lastName = BaseModel::safeInput($_POST['regLastName']);
+            $this->mail = BaseModel::safeInput($_POST['regEmail']);
+            $this->pswd = BaseModel::safeInput($_POST['regPswd']);
+            $this->pswd2 = BaseModel::safeInput($_POST['regPswd2']);
 
-            if (!FrontPage::checkName($this->name)) {
+            if (!BaseModel::checkName($this->name)) {
                 $this->errors['name'] = "Min 2 chars max 16 chars";
             }
-            if (!FrontPage::checkName($this->lastName)) {
+            if (!BaseModel::checkName($this->lastName)) {
                 $this->errors['lastName'] = "Min 2 chars max 16 chars";
             }
-            if (!FrontPage::checkPswd($this->pswd)) {
+            if (!BaseModel::checkPswd($this->pswd)) {
                 $this->errors['pswd'] = "Min 6 chars max 16 chars";
             }
             if (!$this->model->checkPswd2($this->pswd, $this->pswd2)) {
@@ -107,8 +107,8 @@ class FrontPageController
 
     public function actionRegister()
     {
-        $username = FrontPage::safeInput($_GET['username']);
-        $code = FrontPage::safeInput($_GET['code']);
+        $username = BaseModel::safeInput($_GET['username']);
+        $code = BaseModel::safeInput($_GET['code']);
 
         if (!$this->model->checkEmailLink($username, $code)) {
             $this->model->finalRegister($code);

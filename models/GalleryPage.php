@@ -8,13 +8,6 @@ class GalleryPage
         $this->db = $db;
     }
 
-    public function deleteAllImages($gallery){
-        $sql = 'DELETE FROM users_imgs'
-            . ' WHERE user_id = :id AND gallery_name = :gallery';
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute(array('id' => $_SESSION['id'],':gallery' => $gallery));
-    }
-
     public function checkGalleryExist($gallery){
         $sql = 'SELECT id FROM gallerys_list'
             .' WHERE name = :gallery';

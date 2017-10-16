@@ -36,13 +36,13 @@ class EditPageController{
 
     public function editName() {
         if (isset($_POST['editNameForm'])){
-            $this->name = FrontPage::safeInput($_POST['userName']);
-            $this->lastName = FrontPage::safeInput($_POST['userLastName']);
+            $this->name = BaseModel::safeInput($_POST['userName']);
+            $this->lastName = BaseModel::safeInput($_POST['userLastName']);
 
-            if (!FrontPage::checkName($this->name)) {
+            if (!BaseModel::checkName($this->name)) {
                 $this->errorsName['name'] = 1;
             }
-            if (!FrontPage::checkName($this->lastName)) {
+            if (!BaseModel::checkName($this->lastName)) {
                 $this->errorsName['lastname'] = 1;
             }
 
@@ -54,13 +54,13 @@ class EditPageController{
 
     public function editPswd() {
         if (isset($_POST['editPswdForm'])){
-            $this->oldPswd = FrontPage::safeInput($_POST['oldPswd']);
-            $this->newPswd = FrontPage::safeInput($_POST['newPswd']);
+            $this->oldPswd = BaseModel::safeInput($_POST['oldPswd']);
+            $this->newPswd = BaseModel::safeInput($_POST['newPswd']);
 
             if (!$this->model->checkPswdCorrect($this->oldPswd)) {
                 $this->errorsPswd['old'] = 1;
             }
-            if (!FrontPage::checkPswd($this->newPswd)) {
+            if (!BaseModel::checkPswd($this->newPswd)) {
                 $this->errorsPswd['new'] = 1;
             }
 

@@ -153,11 +153,4 @@ class FrontPage{
         return false;
     }
 
-    public static function safeInput($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
 }

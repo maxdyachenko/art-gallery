@@ -27,7 +27,7 @@ class CreateGalleryPageController
             exit;
         }
         if (isset($_POST['name'])){
-            $name = FrontPage::safeInput($_POST['name']);
+            $name = BaseModel::safeInput($_POST['name']);
             if ($this->model->checkGalleryName($name)){
                 $this->errors['name'] = "Gallery with such name already exists";
             }

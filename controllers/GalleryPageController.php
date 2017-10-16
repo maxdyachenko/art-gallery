@@ -84,7 +84,7 @@ class GalleryPageController
                 unlink($file);
             }
         }
-        $this->model->deleteAllImages($gallery);
+        BaseModel::deleteAllImages($gallery);
         header('Location: /gallery/' . $gallery);
         return true;
     }

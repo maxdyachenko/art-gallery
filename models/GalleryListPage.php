@@ -40,4 +40,11 @@ class GalleryListPage
         $stmt = $this->db->prepare($sql);
         $stmt->execute(array(':id' => $_SESSION['id'], ':image' => $image, 'name' => $name));
     }
+
+    public function deleteGallery($name){
+        $sql = 'DELETE FROM gallerys_list'
+            . ' WHERE user_id = :id AND name = :name';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array(':id' => $_SESSION['id'], ':name' => $name));
+    }
 }

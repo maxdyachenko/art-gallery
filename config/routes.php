@@ -13,6 +13,9 @@ return array(
 
     'exit' => 'exit/exit',
 
+    'gallery-list' => 'galleryListPage/index',
+    'delete-gallery' => 'galleryListPage/deleteGallery',
+
     'gallery/([a-zA-Z0-9]+)/([0-9]+)' => 'galleryPage/index/$1/$2',
     'gallery/([a-zA-Z0-9]+)' => 'galleryPage/index/$1',
     'upload-image/([a-zA-Z0-9]+)' => 'galleryPage/imageUpload/$1',
@@ -21,7 +24,7 @@ return array(
 
     'create-gallery-form' => 'createGalleryPage/createGallery',
     'create-gallery' => 'createGalleryPage/index',
-    'gallery-list' => 'galleryListPage/index',
+
 
     'activate-email' => 'activatePage/activateEmail',
 
