@@ -20,6 +20,7 @@ return array(
     'gallery/([a-zA-Z0-9]+)' => 'galleryPage/index/$1',
     'upload-image/([a-zA-Z0-9]+)' => 'galleryPage/imageUpload/$1',
     'delete' => 'galleryPage/delete',
+    'remove-selected-images' => 'galleryPage/deleteSelected',
     'remove-all-images/([a-zA-Z0-9]+)' => 'galleryPage/deleteAll/$1',
 
     'create-gallery-form' => 'createGalleryPage/createGallery',

@@ -7,7 +7,9 @@
         <div class="row justify-content-between buttons-group">
             <button type="button" class="btn btn-danger delete-all" data-toggle="modal" data-target="#delete-image-popup" data-name="<?php echo $this->gallery ?>">Delete All</button>
 <!--            delete-all -> this class to handle this button in js and set coorect action in form popup-->
-            <a class="btn btn-danger">Delete selected</a>
+            <button type="button" class="btn btn-danger delete-selected" data-toggle="modal" data-target="#delete-image-popup">Delete Selected</button>
+<!--            delete-selected -> this class to handle this button in js and set coorect action in form popup-->
+
         </div>
         <div class="row justify-content-between images-wrapper">
             <?php $this->updateContent(); ?>

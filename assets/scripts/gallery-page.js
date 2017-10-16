@@ -56,15 +56,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     $('#delete-image-popup').on('shown.bs.modal', function (e) {
-        var imgName, input, gallery,
+        var imgName, gallery,
+            checkbox = document.getElementsByClassName('form-check-input'),
+            input = this.getElementsByTagName('input')[0],
             form = this.getElementsByTagName('form')[0];
         if (e.relatedTarget.classList.contains('delete-all')) {
             gallery = e.relatedTarget.getAttribute('data-name');
             form.setAttribute('action', '/remove-all-images/' + gallery);
         }
+        else if (e.relatedTarget.classList.contains('delete-selected')){
+            var imgsArray = [];
+            for (var i = 0; i < checkbox.length; i++){
+                if (checkbox[i].checked){
+                    imgsArray.push(checkbox[i].value);
+                }
+            }
+            input.setAttribute('value',imgsArray);
+            form.setAttribute('action', '/remove-selected-images');
+        }
         else {
             imgName = e.relatedTarget.getAttribute('data-name');
-            input = this.getElementsByTagName('input')[0];
             input.setAttribute('value',imgName);
             form.setAttribute('action', '/delete');
         }
@@ -93,8 +104,9 @@ document.addEventListener('DOMContentLoaded', function() {
         zoomPopup.classList.remove('open');
     });
 
-    
-    
+
+
+
 
 });
 

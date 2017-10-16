@@ -89,5 +89,22 @@ class GalleryPageController
         return true;
     }
 
+    public function actionDeleteSelected(){
+        if (isset($_POST['name']) && isset($_POST['gallery'])){
+            $name = BaseModel::safeInput($_POST['name']);
+            $gallery = BaseModel::safeInput($_POST['gallery']);
+
+            $files = explode(',', $name);
+
+            foreach ($files as $file){
+                unlink("{$_SERVER['DOCUMENT_ROOT']}/assets/img/gallerys/{$_SESSION['id']}/{$gallery}/$file");
+            }
+
+            $this->model->deleteSelectedImages($gallery, $files);
+        }
+        header('Location: /gallery/' . $gallery);
+        return true;
+    }
+
 
 }

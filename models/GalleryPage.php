@@ -57,4 +57,12 @@ class GalleryPage
         $stmt->execute(array(':id' => $_SESSION['id'], ':image' => $image, ':gallery' => $gallery));
     }
 
+    public function deleteSelectedImages($gallery, $files){
+        $in = str_repeat('?,', count($files) - 1) . '?';
+        $sql = "DELETE FROM users_imgs WHERE user_id = ? AND gallery_name = ? AND user_img IN ($in)";
+        $stmt = $this->db->prepare($sql);
+        $arr = explode(',' ,$_SESSION['id'] . ',' . $gallery);
+        $stmt->execute(array_merge($arr, $files));
+    }
+
 }
