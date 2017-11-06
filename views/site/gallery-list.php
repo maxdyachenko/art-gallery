@@ -5,7 +5,8 @@
         <a href="/create-gallery" class="btn btn-primary">Create gallery</a>
         <?php foreach ($this->getContent() as $value): ?>
             <div class="card card-custom">
-                <img class="card-img-top" src="<?php echo '/assets/img/gallerys/' . $_SESSION['id'] . '/' . $value['name'] . '/gallery-avatar.jpg' ?>" alt="Card image cap">
+                <?php $ext = explode('.',$value['avatar']); $ext =  $ext[count($ext) - 1]; ?>
+                <img class="card-img-top" src="<?php echo '/assets/img/gallerys/' . $_SESSION['id'] . '/' . $value['name'] . '/gallery-avatar.' . $ext; ?>" alt="Card image cap">
                 <div class="card-block">
                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
                     <div class="buttons-group">

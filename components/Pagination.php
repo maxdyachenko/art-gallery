@@ -46,7 +46,7 @@ class Pagination{
     public function generateLink($index){
         $currentURI = rtrim($_SERVER['REQUEST_URI'], '/') . '/';
         $currentURI = preg_replace('~/[0-9]+~', '', $currentURI);
-        return $currentURI . $this->gallery. '/' . $index;
+        return $currentURI . $index;
     }
 
     public function setCurrentPage($currentPage) {
