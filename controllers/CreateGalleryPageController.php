@@ -28,6 +28,7 @@ class CreateGalleryPageController
         }
         if (isset($_POST['name'])){
             $name = BaseModel::safeInput($_POST['name']);
+            $name = str_replace(" ", "_", $name);
             if ($this->model->checkGalleryName($name)){
                 $this->errors['name'] = "Gallery with such name already exists";
             }
